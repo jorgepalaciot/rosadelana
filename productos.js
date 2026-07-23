@@ -18,7 +18,7 @@
 const CONFIG = {
   // Número de WhatsApp SIN "+" y SIN espacios. Perú empieza con 51.
   // Ejemplo real: si tu número es 987 654 321, escribe "51987654321"
-  whatsapp: "51987654321",
+  whatsapp: "51958603842",
 
   // Usuario de Instagram (con o sin @, se muestra tal cual lo escribas)
   instagram: "@rosadelana",
