@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rosa de Lana — Tejidos artesanales hechos a mano</title>
+<meta name="description" content="Carteras, amigurumis y tejidos únicos hechos a mano con lana. Cada pieza es una obra de arte irrepetible.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+
+<div class="hilo-decorativo" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="contenedor header-inner">
+    <a href="#inicio" class="logo">
+      <span class="logo-texto">Rosa de Lana</span>
+      <span class="logo-subrayado" aria-hidden="true"></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="navMenu">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#nosotros">Nuestra historia</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#contacto" class="nav-cta">Escríbenos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="contenedor hero-inner">
+      <div class="hero-texto">
+        <p class="eyebrow">Tejido a mano · Lima, Perú</p>
+        <h1>Hilo por hilo,<br>cada pieza cuenta<br>una historia.</h1>
+        <p class="hero-parrafo">
+          En Rosa de Lana convertimos ovillos de lana en carteras, amigurumis
+          y accesorios únicos. Nada sale de una fábrica: todo se teje a mano,
+          punto por punto, así que jamás encontrarás dos piezas idénticas.
+        </p>
+        <div class="hero-acciones">
+          <a href="#catalogo" class="boton boton-primario">Ver catálogo</a>
+          <a href="#nosotros" class="boton boton-fantasma">Conocer la historia</a>
+        </div>
+        <div class="hero-datos">
+          <div><strong id="statPiezas">—</strong><span>piezas únicas</span></div>
+          <div><strong>100%</strong><span>hechas a mano</span></div>
+          <div><strong>0</strong><span>piezas repetidas</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 460 460" class="ovillo-svg">
+          <circle cx="230" cy="230" r="190" fill="var(--rosa-claro)" opacity="0.35"/>
+          <circle cx="230" cy="230" r="150" fill="none" stroke="var(--rosa-oscuro)" stroke-width="2" stroke-dasharray="1 10" stroke-linecap="round"/>
+          <path d="M90 230 C 90 140, 160 80, 230 80 C 320 80, 380 150, 380 230 C 380 320, 310 380, 230 380 C 150 380, 90 320, 90 250" fill="none" stroke="var(--lana-tostado)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M120 190 C 150 120, 260 100, 330 160 C 390 210, 360 320, 270 350 C 190 375, 110 320, 120 250" fill="none" stroke="var(--rosa-oscuro)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M150 300 C 130 260, 150 190, 210 150 C 280 105, 360 140, 370 210" fill="none" stroke="var(--cafe-profundo)" stroke-width="10" stroke-linecap="round" opacity="0.85"/>
+          <circle cx="230" cy="230" r="18" fill="var(--cafe-profundo)"/>
+          <path d="M355 130 q40 -10 45 25" fill="none" stroke="var(--cafe-profundo)" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="405" cy="150" r="8" fill="var(--cafe-profundo)"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOGO -->
+  <section class="catalogo" id="catalogo">
+    <div class="contenedor">
+      <p class="eyebrow eyebrow-centrado">Cada pieza, única</p>
+      <h2 class="titulo-seccion">Nuestro catálogo</h2>
+      <p class="subtitulo-seccion">
+        Explora carteras, amigurumis y otros tejidos. El stock cambia seguido:
+        cuando una pieza se vende, no vuelve a existir otra igual.
+      </p>
+
+      <div class="filtros" id="filtros" role="tablist" aria-label="Filtrar por categoría">
+        <!-- generado por JS -->
+      </div>
+
+      <div class="buscador">
+        <input type="search" id="buscador" placeholder="Buscar por nombre… ej. «pulpo», «cartera azul»" aria-label="Buscar producto">
+      </div>
+
+      <div class="grid-productos" id="gridProductos">
+        <!-- generado por JS -->
+      </div>
+
+      <p class="sin-resultados" id="sinResultados" hidden>
+        No encontramos piezas con ese filtro. Prueba con otra categoría o búsqueda.
+      </p>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section class="nosotros" id="nosotros">
+    <div class="contenedor nosotros-inner">
+      <div class="nosotros-texto">
+        <p class="eyebrow">Nuestra historia</p>
+        <h2>Arte que se lleva en las manos antes de llevarse puesto.</h2>
+        <p>
+          Rosa de Lana nació de una madeja de lana y muchas tardes de práctica.
+          Cada cartera, cada amigurumi, cada accesorio pasa horas —a veces
+          días— entre agujas antes de estar listo. Elegimos lanas de buena
+          calidad porque una pieza hecha con cariño merece materiales que
+          duren.
+        </p>
+        <p>
+          No trabajamos con moldes en serie: cada diseño se ajusta a mano, así
+          que las puntadas, los colores y los detalles de tu pieza serán
+          exclusivos tuyos. Cuando se vende, esa pieza deja de existir para
+          siempre.
+        </p>
+        <ul class="lista-valores">
+          <li><strong>Hecho a mano.</strong> Sin máquinas, sin producción en masa.</li>
+          <li><strong>Piezas únicas.</strong> Ninguna cartera o amigurumi se repite.</li>
+          <li><strong>Materiales de calidad.</strong> Lana seleccionada, terminaciones cuidadas.</li>
+        </ul>
+      </div>
+      <div class="nosotros-tag" aria-hidden="true">
+        <div class="tag-colgante">
+          <span class="tag-hilo"></span>
+          <p class="tag-texto">100% artesanal</p>
+          <p class="tag-firma">— Rosa de Lana</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto" id="contacto">
+    <div class="contenedor contacto-inner">
+      <p class="eyebrow eyebrow-centrado">¿Te gustó alguna pieza?</p>
+      <h2 class="titulo-seccion">Hablemos por WhatsApp</h2>
+      <p class="subtitulo-seccion">
+        Cada compra se coordina directo con nosotros: así confirmamos stock,
+        formas de entrega y armamos tu pedido con cariño.
+      </p>
+      <a href="#" id="whatsappGeneral" class="boton boton-primario boton-grande" target="_blank" rel="noopener">
+        Escribir por WhatsApp
+      </a>
+      <div class="redes">
+        <a href="#" id="linkInstagram" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" id="linkEmail">Correo</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="contenedor footer-inner">
+    <span class="logo-texto logo-footer">Rosa de Lana</span>
+    <p>Tejidos hechos a mano con lana · Piezas únicas, sin repetir.</p>
+    <p class="footer-copy">© <span id="anioActual"></span> Rosa de Lana. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<div class="modal-producto" id="modalProducto" hidden>
+  <div class="modal-fondo" id="modalFondo"></div>
+  <div class="modal-caja" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <button class="modal-cerrar" id="modalCerrar" aria-label="Cerrar">✕</button>
+    <div class="modal-imagen">
+      <img id="modalImagen" src="" alt="">
+    </div>
+    <div class="modal-info">
+      <p class="modal-categoria" id="modalCategoria"></p>
+      <h3 id="modalTitulo"></h3>
+      <p class="modal-precio" id="modalPrecio"></p>
+      <p class="modal-descripcion" id="modalDescripcion"></p>
+      <a href="#" id="modalWhatsapp" class="boton boton-primario" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/productos.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
