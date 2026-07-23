@@ -75,7 +75,7 @@ const PRODUCTOS = [
     nombre: "Cartera Crochet Terracota",
     categoria: "carteras",
     precio: 89,
-    imagen: "placeholder.jpg",
+    imagen: "carterafuccia.jpg",
     descripcion: "Cartera tejida a crochet en tonos terracota, con forro interno y cierre de madera. Pieza única, tejida punto por punto.",
     destacado: true,
     disponible: true,
