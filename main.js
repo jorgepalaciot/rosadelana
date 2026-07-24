@@ -99,7 +99,6 @@
     return `
       <article class="tarjeta-producto" data-id="${producto.id}" tabindex="0" role="button"
                 aria-label="Consultar ${producto.nombre} por WhatsApp">
-        <span class="tarjeta-agujero" aria-hidden="true"></span>
         <div class="tarjeta-imagen">
           ${producto.destacado && disponible ? '<span class="cinta-destacado">Destacado</span>' : ""}
           <img src="${RUTA_IMAGENES}${producto.imagen}" alt="${producto.nombre}" loading="lazy">

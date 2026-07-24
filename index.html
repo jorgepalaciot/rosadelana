@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="data:,">
@@ -20,7 +20,7 @@
 <header class="site-header">
   <div class="contenedor header-inner">
     <a href="#inicio" class="logo">
-      <img src="logo.png" alt="Rosa de Lana" class="logo-imagen">
+      <img src="logo.png" alt="Rosa de Lana" class="logo-imagen" style="height:48px;width:auto;">
     </a>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -37,40 +37,32 @@
 <main>
   <!-- HERO -->
   <section class="hero" id="inicio">
-    <div class="contenedor hero-inner">
-      <div class="hero-texto">
-        <p class="eyebrow">Tejido a mano · Lima, Perú</p>
-        <h1>Hilo por hilo,<br>cada pieza cuenta<br>una historia.</h1>
-        <p class="hero-parrafo">
-          En Rosa de Lana convertimos ovillos de lana en carteras, amigurumis
-          y accesorios únicos. Nada sale de una fábrica: todo se teje a mano,
-          punto por punto, así que jamás encontrarás dos piezas idénticas.
-        </p>
-        <div class="hero-acciones">
-          <a href="#catalogo" class="boton boton-primario">Ver catálogo</a>
-          <a href="#nosotros" class="boton boton-fantasma">Conocer la historia</a>
-        </div>
-        <div class="hero-datos">
-          <div><strong id="statPiezas">—</strong><span>piezas únicas</span></div>
-          <div><strong>100%</strong><span>hechas a mano</span></div>
-          <div><strong>0</strong><span>piezas repetidas</span></div>
-        </div>
-      </div>
-
-      <div class="hero-visual" aria-hidden="true">
-        <svg viewBox="0 0 460 460" class="ovillo-svg">
-          <circle cx="230" cy="230" r="190" fill="var(--rosa-claro)" opacity="0.35"/>
-          <circle cx="230" cy="230" r="150" fill="none" stroke="var(--rosa-oscuro)" stroke-width="2" stroke-dasharray="1 10" stroke-linecap="round"/>
-          <path d="M90 230 C 90 140, 160 80, 230 80 C 320 80, 380 150, 380 230 C 380 320, 310 380, 230 380 C 150 380, 90 320, 90 250" fill="none" stroke="var(--lana-tostado)" stroke-width="10" stroke-linecap="round"/>
-          <path d="M120 190 C 150 120, 260 100, 330 160 C 390 210, 360 320, 270 350 C 190 375, 110 320, 120 250" fill="none" stroke="var(--rosa-oscuro)" stroke-width="10" stroke-linecap="round"/>
-          <path d="M150 300 C 130 260, 150 190, 210 150 C 280 105, 360 140, 370 210" fill="none" stroke="var(--cafe-profundo)" stroke-width="10" stroke-linecap="round" opacity="0.85"/>
-          <circle cx="230" cy="230" r="18" fill="var(--cafe-profundo)"/>
-          <path d="M355 130 q40 -10 45 25" fill="none" stroke="var(--cafe-profundo)" stroke-width="6" stroke-linecap="round"/>
-          <circle cx="405" cy="150" r="8" fill="var(--cafe-profundo)"/>
-        </svg>
+    <div class="hero-fondo" style="background-image:url('hero.jpg');"></div>
+    <div class="hero-velo"></div>
+    <div class="contenedor hero-contenido">
+      <p class="hero-eyebrow">Tejidos hechos a mano · Lima, Perú</p>
+      <h1 class="hero-titulo">Rosa<span class="hero-titulo-guion">de</span>Lana</h1>
+      <p class="hero-tags">HECHO A MANO &nbsp;·&nbsp; PIEZAS ÚNICAS &nbsp;·&nbsp; LANA DE CALIDAD</p>
+      <p class="hero-parrafo">
+        Convertimos ovillos de lana en carteras, amigurumis y accesorios
+        únicos. Nada sale de una fábrica: todo se teje a mano, punto por
+        punto, así que jamás encontrarás dos piezas idénticas.
+      </p>
+      <div class="hero-acciones">
+        <a href="#catalogo" class="boton boton-hero-primario">Ver catálogo</a>
+        <a href="#nosotros" class="boton boton-hero-fantasma">Conocer la historia</a>
       </div>
     </div>
+    <p class="hero-firma">Rosa de Lana</p>
   </section>
+
+  <div class="hero-datos-franja">
+    <div class="contenedor hero-datos">
+      <div><strong id="statPiezas">—</strong><span>piezas únicas</span></div>
+      <div><strong>100%</strong><span>hechas a mano</span></div>
+      <div><strong>0</strong><span>piezas repetidas</span></div>
+    </div>
+  </div>
 
   <!-- CATALOGO -->
   <section class="catalogo" id="catalogo">
@@ -125,12 +117,9 @@
           <li><strong>Materiales de calidad.</strong> Lana seleccionada, terminaciones cuidadas.</li>
         </ul>
       </div>
-      <div class="nosotros-tag" aria-hidden="true">
-        <div class="tag-colgante">
-          <span class="tag-hilo"></span>
-          <p class="tag-texto">100% artesanal</p>
-          <p class="tag-firma">— Rosa de Lana</p>
-        </div>
+      <div class="nosotros-foto" aria-hidden="true" style="background-image:url('historia.jpg');">
+        <div class="nosotros-foto-velo"></div>
+        <p class="nosotros-foto-texto">100% artesanal</p>
       </div>
     </div>
   </section>
