@@ -112,14 +112,23 @@ ul { padding: 0; margin: 0; list-style: none; }
 }
 .boton-grande { padding: 16px 34px; font-size: 1.05rem; }
 
+#catalogo, #nosotros, #contacto {
+  scroll-margin-top: 90px;
+}
+
 /* ============================================================
    Header
    ============================================================ */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background: rgba(244, 235, 220, 0.9);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.site-header.encabezado-solido {
+  background: rgba(244, 235, 220, 0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(43, 29, 27, 0.08);
 }
@@ -130,9 +139,16 @@ ul { padding: 0; margin: 0; list-style: none; }
   padding-top: 16px;
   padding-bottom: 16px;
 }
-.logo { display: inline-block; position: relative; }
+.logo {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  background: rgba(255, 252, 247, 0.85);
+  padding: 6px 12px;
+  border-radius: 6px;
+}
 .logo-imagen {
-  height: 48px;
+  height: 44px;
   width: auto;
   display: block;
 }
@@ -156,8 +172,19 @@ ul { padding: 0; margin: 0; list-style: none; }
   font-size: 0.8rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--cafe-profundo);
+  color: var(--blanco-hilo);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35);
   position: relative;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.site-header.encabezado-solido .nav a {
+  color: var(--cafe-profundo);
+  text-shadow: none;
+}
+.nav a.nav-cta,
+.site-header.encabezado-solido .nav a.nav-cta {
+  color: var(--blanco-hilo);
+  text-shadow: none;
 }
 .nav a:not(.nav-cta)::after {
   content: "";
@@ -187,8 +214,12 @@ ul { padding: 0; margin: 0; list-style: none; }
 }
 .menu-toggle span {
   width: 24px; height: 2px;
-  background: var(--cafe-profundo);
+  background: var(--blanco-hilo);
   border-radius: 2px;
+  transition: background 0.3s ease;
+}
+.site-header.encabezado-solido .menu-toggle span {
+  background: var(--cafe-profundo);
 }
 
 @media (max-width: 760px) {
@@ -205,6 +236,10 @@ ul { padding: 0; margin: 0; list-style: none; }
     display: none;
   }
   .nav.abierto { display: flex; }
+  .nav.abierto a {
+    color: var(--cafe-profundo);
+    text-shadow: none;
+  }
   .nav a { width: 100%; padding: 10px 0; }
   .nav-cta { text-align: center; margin-top: 6px; }
 }

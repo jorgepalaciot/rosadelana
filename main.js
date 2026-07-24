@@ -168,6 +168,20 @@
     );
   }
 
+  /* ---------- Header transparente sobre el hero ---------- */
+  function activarHeaderScroll() {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
+
+    const actualizar = () => {
+      const umbral = window.innerHeight * 0.75;
+      header.classList.toggle("encabezado-solido", window.scrollY > umbral);
+    };
+
+    actualizar();
+    window.addEventListener("scroll", actualizar, { passive: true });
+  }
+
   /* ---------- Inicio ---------- */
   document.addEventListener("DOMContentLoaded", () => {
     pintarConfiguracionGeneral();
@@ -175,5 +189,6 @@
     pintarProductos();
     activarBusqueda();
     activarMenuMovil();
+    activarHeaderScroll();
   });
 })();
