@@ -171,16 +171,17 @@
   /* ---------- Header transparente sobre el hero ---------- */
   function activarHeaderScroll() {
     const header = document.querySelector(".site-header");
-    const franja = document.querySelector(".hero-datos-franja");
-    if (!header || !franja) return;
+    const hero = document.querySelector(".hero");
+    if (!header || !hero) return;
 
-    const observer = new IntersectionObserver(
-      (entradas) => {
-        header.classList.toggle("encabezado-solido", entradas[0].isIntersecting);
-      },
-      { rootMargin: `-${header.offsetHeight}px 0px 0px 0px`, threshold: 0 }
-    );
-    observer.observe(franja);
+    const actualizar = () => {
+      const limite = hero.offsetHeight - header.offsetHeight;
+      header.classList.toggle("encabezado-solido", window.scrollY > limite);
+    };
+
+    actualizar();
+    window.addEventListener("scroll", actualizar, { passive: true });
+    window.addEventListener("resize", actualizar);
   }
 
   /* ---------- Inicio ---------- */
