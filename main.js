@@ -122,19 +122,12 @@
     sinResultados.hidden = lista.length !== 0;
 
     grid.querySelectorAll(".tarjeta-producto").forEach((tarjeta) => {
-      const producto = PRODUCTOS.find((p) => p.id === tarjeta.dataset.id);
-      const disponible = producto.disponible !== false;
-
-      const consultar = () => {
-        if (!disponible) return;
-        window.open(urlWhatsapp(mensajeProducto(producto)), "_blank", "noopener");
-      };
-
-      tarjeta.addEventListener("click", consultar);
+      const abrir = () => abrirDetalle(tarjeta.dataset.id);
+      tarjeta.addEventListener("click", abrir);
       tarjeta.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          consultar();
+          abrir();
         }
       });
     });
@@ -149,6 +142,85 @@
         e.stopPropagation(); // no disparar la consulta individual de la tarjeta
         alternarSeleccion(id);
       });
+    });
+  }
+
+  /* ---------- Modal de detalle ---------- */
+  function listaImagenes(producto) {
+    if (Array.isArray(producto.imagenes) && producto.imagenes.length > 0) {
+      return producto.imagenes;
+    }
+    return [producto.imagen];
+  }
+
+  function abrirDetalle(id) {
+    const producto = PRODUCTOS.find((p) => p.id === id);
+    if (!producto) return;
+
+    const imagenes = listaImagenes(producto);
+
+    const imgPrincipal = document.getElementById("modalImagen");
+    imgPrincipal.src = RUTA_IMAGENES + imagenes[0];
+    imgPrincipal.alt = producto.nombre;
+
+    // Miniaturas (solo si hay más de una foto)
+    const contenedorMini = document.getElementById("modalMiniaturas");
+    if (imagenes.length > 1) {
+      contenedorMini.innerHTML = imagenes
+        .map(
+          (img, i) => `
+          <button type="button" class="modal-miniatura${i === 0 ? " activa" : ""}" data-src="${RUTA_IMAGENES}${img}">
+            <img src="${RUTA_IMAGENES}${img}" alt="Foto ${i + 1} de ${producto.nombre}">
+          </button>`
+        )
+        .join("");
+      contenedorMini.hidden = false;
+
+      contenedorMini.querySelectorAll(".modal-miniatura").forEach((mini) => {
+        mini.addEventListener("click", () => {
+          imgPrincipal.src = mini.dataset.src;
+          contenedorMini.querySelectorAll(".modal-miniatura").forEach((m) => m.classList.remove("activa"));
+          mini.classList.add("activa");
+        });
+      });
+    } else {
+      contenedorMini.innerHTML = "";
+      contenedorMini.hidden = true;
+    }
+
+    document.getElementById("modalCategoria").textContent = nombreCategoria(producto.categoria);
+    document.getElementById("modalTitulo").textContent = producto.nombre;
+    document.getElementById("modalPrecio").textContent = formatearPrecio(producto.precio);
+    document.getElementById("modalDescripcion").textContent = producto.descripcion || "";
+
+    const btnWhatsapp = document.getElementById("modalWhatsapp");
+    const disponible = producto.disponible !== false;
+    if (disponible) {
+      btnWhatsapp.href = urlWhatsapp(mensajeProducto(producto));
+      btnWhatsapp.textContent = "Consultar por WhatsApp";
+      btnWhatsapp.style.pointerEvents = "auto";
+      btnWhatsapp.style.opacity = "1";
+    } else {
+      btnWhatsapp.textContent = "Pieza vendida";
+      btnWhatsapp.removeAttribute("href");
+      btnWhatsapp.style.pointerEvents = "none";
+      btnWhatsapp.style.opacity = "0.5";
+    }
+
+    document.getElementById("modalProducto").hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function cerrarDetalle() {
+    document.getElementById("modalProducto").hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  function activarModal() {
+    document.getElementById("modalCerrar").addEventListener("click", cerrarDetalle);
+    document.getElementById("modalFondo").addEventListener("click", cerrarDetalle);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") cerrarDetalle();
     });
   }
 
@@ -258,5 +330,6 @@
     activarMenuMovil();
     activarHeaderScroll();
     activarBarraSeleccion();
+    activarModal();
   });
 })();

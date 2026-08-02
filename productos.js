@@ -18,7 +18,7 @@
 const CONFIG = {
   // Número de WhatsApp SIN "+" y SIN espacios. Perú empieza con 51.
   // Ejemplo real: si tu número es 987 654 321, escribe "51987654321"
-  whatsapp: "51958603842",
+  whatsapp: "51987654321",
 
   // Usuario de Instagram (con o sin @, se muestra tal cual lo escribas)
   instagram: "@rosadelana",
@@ -62,7 +62,14 @@ const CATEGORIAS = [
      precio       -> solo el número, sin "S/" (ej: 85, no "85 soles")
      imagen       -> nombre del archivo de foto, guardado dentro de la
                      carpeta "fotos/", ej: "cartera-negra-01.jpg"
-     descripcion  -> texto corto describiendo la pieza
+                     (se usa como foto principal / única si no agregas "imagenes")
+     imagenes     -> OPCIONAL. Si quieres mostrar varias fotos del mismo
+                     producto (para que la gente vea más ángulos al hacer
+                     clic), agrega esta lista en vez de una sola "imagen":
+                       imagenes: ["cartera-negra-01.jpg", "cartera-negra-02.jpg", "cartera-negra-03.jpg"],
+                     Si no la agregas, no pasa nada — se usa "imagen" sola.
+     descripcion  -> texto corto describiendo la pieza (aparece en el
+                     detalle al hacer clic en el producto)
      destacado    -> true / false — true lo resalta con una cinta "Destacado"
      disponible   -> true / false — false lo muestra como "Vendido" y no se puede consultar
 
@@ -75,7 +82,7 @@ const PRODUCTOS = [
     nombre: "Cartera Crochet Terracota",
     categoria: "carteras",
     precio: 89,
-    imagen: "carterafuccia.jpeg",
+    imagen: "placeholder.jpg",
     descripcion: "Cartera tejida a crochet en tonos terracota, con forro interno y cierre de madera. Pieza única, tejida punto por punto.",
     destacado: true,
     disponible: true,

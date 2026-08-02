@@ -164,6 +164,30 @@
   </div>
 </div>
 
+<div class="modal-producto" id="modalProducto" hidden>
+  <div class="modal-fondo" id="modalFondo"></div>
+  <div class="modal-caja" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <button class="modal-cerrar" id="modalCerrar" aria-label="Cerrar">✕</button>
+
+    <div class="modal-galeria">
+      <div class="modal-imagen-principal">
+        <img id="modalImagen" src="" alt="">
+      </div>
+      <div class="modal-miniaturas" id="modalMiniaturas">
+        <!-- generado por JS solo si hay más de una foto -->
+      </div>
+    </div>
+
+    <div class="modal-info">
+      <p class="modal-categoria" id="modalCategoria"></p>
+      <h3 id="modalTitulo"></h3>
+      <p class="modal-precio" id="modalPrecio"></p>
+      <p class="modal-descripcion" id="modalDescripcion"></p>
+      <a href="#" id="modalWhatsapp" class="boton boton-primario" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+    </div>
+  </div>
+</div>
+
 <script src="productos.js"></script>
 <script src="main.js"></script>
 </body>
