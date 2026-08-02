@@ -101,6 +101,7 @@
                 aria-label="Consultar ${producto.nombre} por WhatsApp">
         <div class="tarjeta-imagen">
           ${producto.destacado && disponible ? '<span class="cinta-destacado">Destacado</span>' : ""}
+          ${disponible ? `<button type="button" class="tarjeta-seleccionar" data-id-seleccionar="${producto.id}" aria-pressed="false" aria-label="Agregar ${producto.nombre} a la consulta"><span class="tarjeta-seleccionar-check">✓</span></button>` : ""}
           <img src="${RUTA_IMAGENES}${producto.imagen}" alt="${producto.nombre}" loading="lazy">
           ${!disponible ? '<span class="etiqueta-vendido">Vendido</span>' : ""}
         </div>
@@ -136,6 +137,70 @@
           consultar();
         }
       });
+    });
+
+    // Botón "agregar a la consulta" (selección múltiple)
+    grid.querySelectorAll(".tarjeta-seleccionar").forEach((boton) => {
+      const id = boton.dataset.idSeleccionar;
+      boton.classList.toggle("activo", seleccionados.has(id));
+      boton.setAttribute("aria-pressed", seleccionados.has(id));
+
+      boton.addEventListener("click", (e) => {
+        e.stopPropagation(); // no disparar la consulta individual de la tarjeta
+        alternarSeleccion(id);
+      });
+    });
+  }
+
+  /* ---------- Selección múltiple ---------- */
+  const seleccionados = new Set();
+
+  function alternarSeleccion(id) {
+    if (seleccionados.has(id)) {
+      seleccionados.delete(id);
+    } else {
+      seleccionados.add(id);
+    }
+    actualizarBotonesSeleccion();
+    actualizarBarraSeleccion();
+  }
+
+  function actualizarBotonesSeleccion() {
+    document.querySelectorAll(".tarjeta-seleccionar").forEach((boton) => {
+      const activo = seleccionados.has(boton.dataset.idSeleccionar);
+      boton.classList.toggle("activo", activo);
+      boton.setAttribute("aria-pressed", activo);
+    });
+  }
+
+  function actualizarBarraSeleccion() {
+    const barra = document.getElementById("barraSeleccion");
+    const cantidad = document.getElementById("barraSeleccionCantidad");
+    const enlace = document.getElementById("barraSeleccionEnviar");
+    if (!barra) return;
+
+    barra.hidden = seleccionados.size === 0;
+    if (seleccionados.size === 0) return;
+
+    cantidad.textContent = seleccionados.size;
+
+    const productosSeleccionados = PRODUCTOS.filter((p) => seleccionados.has(p.id));
+    const lineas = productosSeleccionados
+      .map((p) => `• ${p.nombre} (${formatearPrecio(p.precio)})`)
+      .join("\n");
+    const total = productosSeleccionados.reduce((suma, p) => suma + p.precio, 0);
+    const mensaje = `¡Hola! Me interesan estas piezas de Rosa de Lana 🌸\n\n${lineas}\n\nTotal aproximado: ${formatearPrecio(total)}`;
+
+    enlace.href = urlWhatsapp(mensaje);
+  }
+
+  function activarBarraSeleccion() {
+    const vaciar = document.getElementById("barraSeleccionVaciar");
+    if (!vaciar) return;
+    vaciar.addEventListener("click", () => {
+      seleccionados.clear();
+      actualizarBotonesSeleccion();
+      actualizarBarraSeleccion();
     });
   }
 
@@ -192,5 +257,6 @@
     activarBusqueda();
     activarMenuMovil();
     activarHeaderScroll();
+    activarBarraSeleccion();
   });
 })();
