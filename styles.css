@@ -376,19 +376,6 @@ ul { padding: 0; margin: 0; list-style: none; }
   max-width: 720px;
 }
 
-@media (min-width: 641px) {
-  .hero {
-    align-items: flex-start;
-    text-align: left;
-    padding-left: 6vw;
-  }
-  .hero-contenido { max-width: 540px; }
-  .hero-titulo { font-size: clamp(2.8rem, 5.5vw, 4.6rem); }
-  .hero-acciones { justify-content: flex-start; }
-  .hero-parrafo { margin: 0 0 36px; }
-  .hero-firma { align-self: center; }
-}
-
 .hero-eyebrow {
   font-family: var(--fuente-cuerpo);
   font-size: 0.78rem;
@@ -396,7 +383,7 @@ ul { padding: 0; margin: 0; list-style: none; }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--blanco-hilo);
-  text-shadow: 0 1px 3px rgba(0,0,0,0.85), 0 2px 8px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
   margin: 0 0 22px;
 }
 
@@ -408,7 +395,7 @@ ul { padding: 0; margin: 0; list-style: none; }
   letter-spacing: 0.01em;
   margin: 0 0 22px;
   color: var(--blanco-hilo);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.85), 0 3px 14px rgba(0,0,0,0.6);
+  text-shadow: 0 2px 14px rgba(0,0,0,0.45);
 }
 .hero-titulo-guion {
   display: inline-block;
@@ -429,7 +416,7 @@ ul { padding: 0; margin: 0; list-style: none; }
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(255,252,247,0.85);
-  text-shadow: 0 1px 3px rgba(0,0,0,0.85), 0 2px 8px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
   margin: 0 0 26px;
 }
 
@@ -438,7 +425,7 @@ ul { padding: 0; margin: 0; list-style: none; }
   font-style: normal;
   font-weight: 400;
   color: rgba(255,252,247,0.95);
-  text-shadow: 0 1px 3px rgba(0,0,0,0.85), 0 2px 8px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
   font-size: 1.05rem;
   line-height: 1.7;
   max-width: 46ch;
@@ -491,7 +478,7 @@ ul { padding: 0; margin: 0; list-style: none; }
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(255,252,247,0.8);
-  text-shadow: 0 1px 3px rgba(0,0,0,0.85), 0 2px 8px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 
 .hero-datos-franja {
@@ -534,6 +521,14 @@ ul { padding: 0; margin: 0; list-style: none; }
   }
   .hero-datos { gap: 32px; }
 
+  /* Sombra más marcada en cada letra, solo para pantallas de celular */
+  .hero-eyebrow,
+  .hero-titulo,
+  .hero-tags,
+  .hero-parrafo,
+  .hero-firma {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.85), 0 2px 8px rgba(0,0,0,0.6);
+  }
 }
 
 /* ============================================================
@@ -879,3 +874,21 @@ ul { padding: 0; margin: 0; list-style: none; }
 .footer-copy { font-size: 0.82rem; margin-top: 14px; opacity: 0.6; }
 
 
+
+/* ============================================================
+   Hero — ajuste final para pantallas grandes (computadora)
+   Colocado al final del archivo a propósito, para que gane
+   siempre sobre las reglas base de arriba.
+   ============================================================ */
+@media (min-width: 641px) {
+  .hero {
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding-left: 6vw !important;
+  }
+  .hero-contenido { max-width: 540px !important; }
+  .hero-titulo { font-size: clamp(2.8rem, 5.5vw, 4.6rem) !important; }
+  .hero-acciones { justify-content: flex-start !important; }
+  .hero-parrafo { margin: 0 0 36px !important; }
+  .hero-firma { align-self: center !important; }
+}
