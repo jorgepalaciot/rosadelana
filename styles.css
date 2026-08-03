@@ -886,7 +886,7 @@ ul { padding: 0; margin: 0; list-style: none; }
     text-align: left !important;
     padding-left: 6vw !important;
   }
-  .hero-contenido { max-width: 540px !important; }
+  .hero-contenido { max-width: 540px !important; margin: 0 !important; }
   .hero-titulo { font-size: clamp(2.8rem, 5.5vw, 4.6rem) !important; }
   .hero-acciones { justify-content: flex-start !important; }
   .hero-parrafo { margin: 0 0 36px !important; }
