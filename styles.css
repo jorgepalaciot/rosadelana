@@ -368,11 +368,11 @@ ul { padding: 0; margin: 0; list-style: none; }
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(15, 9, 8, 0.70) 0%,
-    rgba(15, 9, 8, 0.55) 25%,
-    rgba(15, 9, 8, 0.25) 45%,
-    rgba(15, 9, 8, 0.05) 60%,
-    rgba(15, 9, 8, 0) 70%
+    rgba(68, 42, 28, 0.72) 0%,
+    rgba(82, 54, 38, 0.55) 25%,
+    rgba(112, 82, 62, 0.28) 45%,
+    rgba(140, 110, 88, 0.08) 60%,
+    transparent 70%
   );
   z-index: 1;
 }
