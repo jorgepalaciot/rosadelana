@@ -366,7 +366,8 @@ ul { padding: 0; margin: 0; list-style: none; }
 .hero-velo {
   position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(20,13,12,0.35) 0%, rgba(20,13,12,0.45) 45%, rgba(20,13,12,0.75) 100%);
+    radial-gradient(120% 90% at 50% 45%, rgba(15,9,8,0.6) 0%, rgba(15,9,8,0.32) 45%, rgba(15,9,8,0.2) 70%),
+    linear-gradient(180deg, rgba(15,9,8,0.45) 0%, rgba(15,9,8,0.4) 40%, rgba(15,9,8,0.72) 100%);
   z-index: 1;
 }
 .hero-contenido { position: relative; z-index: 2; max-width: 760px; }
@@ -377,7 +378,8 @@ ul { padding: 0; margin: 0; list-style: none; }
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,252,247,0.85);
+  color: rgba(255,252,247,0.9);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
   margin: 0 0 22px;
 }
 
@@ -389,6 +391,7 @@ ul { padding: 0; margin: 0; list-style: none; }
   letter-spacing: 0.01em;
   margin: 0 0 22px;
   color: var(--blanco-hilo);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.4);
 }
 .hero-titulo-guion {
   display: inline-block;
@@ -408,14 +411,16 @@ ul { padding: 0; margin: 0; list-style: none; }
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255,252,247,0.75);
+  color: rgba(255,252,247,0.8);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
   margin: 0 0 26px;
 }
 
 .hero-parrafo {
   font-family: var(--fuente-display);
   font-style: italic;
-  color: rgba(255,252,247,0.92);
+  color: rgba(255,252,247,0.95);
+  text-shadow: 0 1px 10px rgba(0,0,0,0.45);
   font-size: 1.25rem;
   line-height: 1.5;
   max-width: 46ch;
@@ -467,7 +472,8 @@ ul { padding: 0; margin: 0; list-style: none; }
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255,252,247,0.65);
+  color: rgba(255,252,247,0.7);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
 }
 
 .hero-datos-franja {
@@ -504,6 +510,9 @@ ul { padding: 0; margin: 0; list-style: none; }
     min-height: 100vh;
     min-height: 100svh; /* usa la altura real visible en móvil, sin la barra del navegador */
     padding-top: 100px;
+  }
+  .hero-fondo {
+    background-position: 68% center;
   }
   .hero-datos { gap: 32px; }
 }
