@@ -367,12 +367,11 @@ ul { padding: 0; margin: 0; list-style: none; }
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    90deg,
-    rgba(68, 42, 28, 0.72) 0%,
-    rgba(82, 54, 38, 0.55) 25%,
-    rgba(112, 82, 62, 0.28) 45%,
-    rgba(140, 110, 88, 0.08) 60%,
-    transparent 70%
+    to right,
+    rgba(84, 53, 36, 0.75) 0%,
+    rgba(112, 74, 49, 0.55) 30%,
+    rgba(156, 118, 86, 0.18) 50%,
+    transparent 65%
   );
   z-index: 1;
 }
