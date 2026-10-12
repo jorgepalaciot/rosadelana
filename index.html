@@ -5,13 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rosa de Lana — Tejidos artesanales hechos a mano</title>
 <meta name="description" content="Carteras, amigurumis y tejidos únicos hechos a mano con lana. Cada pieza es una obra de arte irrepetible.">
+<meta name="theme-color" content="#8C3A52">
+<!-- Vista previa al compartir el link por WhatsApp/Instagram.
+     Cuando tengas dominio propio, cambia las dos direcciones de abajo. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rosa de Lana — Tejidos artesanales hechos a mano">
+<meta property="og:description" content="Carteras, amigurumis y accesorios tejidos a mano en Lima. Cada pieza es única.">
+<meta property="og:image" content="https://jorgepalaciot.github.io/rosadelana/hero.jpg">
+<meta property="og:url" content="https://jorgepalaciot.github.io/rosadelana/">
+<meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles.css?v=2">
-<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css?v=3">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧶</text></svg>">
 </head>
 <body>
 
@@ -27,8 +36,9 @@
     </button>
     <nav class="nav" id="navMenu">
       <a href="#catalogo">Catálogo</a>
+      <a href="#como-comprar">Cómo comprar</a>
       <a href="#nosotros">Nuestra historia</a>
-      <a href="#contacto">Contacto</a>
+      <a href="turrones.html" data-turrones>Turrones</a>
       <a href="#contacto" class="nav-cta">Escríbenos</a>
     </nav>
   </div>
@@ -58,7 +68,7 @@
 
   <div class="hero-datos-franja">
     <div class="contenedor hero-datos">
-      <div><strong id="statPiezas">—</strong><span>piezas únicas</span></div>
+      <div><strong id="statPiezas">—</strong><span>piezas disponibles</span></div>
       <div><strong>100%</strong><span>hechas a mano</span></div>
       <div><strong>0</strong><span>piezas repetidas</span></div>
     </div>
@@ -89,6 +99,50 @@
       <p class="sin-resultados" id="sinResultados" hidden>
         No encontramos piezas con ese filtro. Prueba con otra categoría o búsqueda.
       </p>
+    </div>
+  </section>
+
+  <!-- COMO COMPRAR -->
+  <section class="comprar" id="como-comprar">
+    <div class="contenedor">
+      <p class="eyebrow eyebrow-centrado">Comprar es sencillo</p>
+      <h2 class="titulo-seccion">Cómo comprar</h2>
+      <p class="subtitulo-seccion">
+        No hay carrito automático: conversamos por WhatsApp y coordinamos todo juntos.
+      </p>
+
+      <ol class="pasos">
+        <li class="paso">
+          <span class="paso-numero" aria-hidden="true">1</span>
+          <h3>Elige tu pieza</h3>
+          <p>Mira el catálogo. Toca el círculo de las piezas que te gusten o abre una para ver más fotos.</p>
+        </li>
+        <li class="paso">
+          <span class="paso-numero" aria-hidden="true">2</span>
+          <h3>Escríbenos por WhatsApp</h3>
+          <p>Se abre un mensaje ya escrito con lo que elegiste. Confirmamos que la pieza siga disponible.</p>
+        </li>
+        <li class="paso">
+          <span class="paso-numero" aria-hidden="true">3</span>
+          <h3>Paga y recíbela</h3>
+          <p>Pagas por Yape, Plin o transferencia y coordinamos la entrega.</p>
+        </li>
+      </ol>
+
+      <div class="info-compra">
+        <div class="info-compra-bloque">
+          <h3>Formas de pago</h3>
+          <p>Yape, Plin o transferencia bancaria. Te pasamos los datos por WhatsApp.</p>
+        </div>
+        <div class="info-compra-bloque">
+          <h3>Envíos</h3>
+          <p>El costo y el tiempo de entrega se coordinan por WhatsApp según tu distrito o ciudad.</p>
+        </div>
+        <div class="info-compra-bloque">
+          <h3>Piezas únicas</h3>
+          <p>Si una pieza ya se vendió, no vuelve a existir otra igual. Por eso confirmamos antes de que pagues.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -124,6 +178,22 @@
     </div>
   </section>
 
+  <!-- ENCARGOS -->
+  <section class="encargos" id="encargos">
+    <div class="contenedor encargos-inner">
+      <p class="eyebrow eyebrow-centrado">Hecho a tu medida</p>
+      <h2 class="titulo-seccion">¿No encuentras lo que imaginas?</h2>
+      <p class="subtitulo-seccion">
+        Cuéntanos qué te gustaría: un amigurumi de tu mascota, una cartera en tus
+        colores, un regalo para alguien especial. Te respondemos con el precio y
+        el tiempo estimado según el diseño.
+      </p>
+      <a href="#" id="whatsappEncargo" class="boton boton-primario" target="_blank" rel="noopener">
+        Contar mi idea por WhatsApp
+      </a>
+    </div>
+  </section>
+
   <!-- CONTACTO -->
   <section class="contacto" id="contacto">
     <div class="contenedor contacto-inner">
@@ -148,6 +218,7 @@
   <div class="contenedor footer-inner">
     <span class="logo-texto logo-footer">Rosa de Lana</span>
     <p>Tejidos hechos a mano con lana · Piezas únicas, sin repetir.</p>
+    <p class="footer-links"><a href="turrones.html" data-turrones>Turrones de temporada</a></p>
     <p class="footer-copy">© <span id="anioActual"></span> Rosa de Lana. Todos los derechos reservados.</p>
   </div>
 </footer>
@@ -188,7 +259,7 @@
   </div>
 </div>
 
-<script src="productos.js?v=2"></script>
-<script src="main.js?v=2"></script>
+<script src="productos.js?v=3"></script>
+<script src="main.js?v=3"></script>
 </body>
 </html>

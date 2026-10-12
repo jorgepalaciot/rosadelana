@@ -33,6 +33,16 @@ const CONFIG = {
 
   // Mensaje del botón general "Escribir por WhatsApp"
   mensajeWhatsappGeneral: "¡Hola! Vi la web de Rosa de Lana y quisiera hacer una consulta 🌸",
+
+  // Mensaje del botón "Contar mi idea" (encargos a medida)
+  mensajeWhatsappEncargo: "¡Hola! Me gustaría encargar una pieza tejida a mi gusto. Les cuento mi idea 🌸",
+
+  // Turrones (página aparte: turrones.html)
+  // Pon false cuando no sea temporada: se esconde la página y todos sus enlaces.
+  turronesActivo: true,
+  mensajeWhatsappTurron: "¡Hola! Vi «{producto}» ({precio}) en la página de turrones de Rosa de Lana y quisiera hacer un pedido 🍬",
+  // Texto que aparece arriba de los turrones (fechas, pedido mínimo, etc.)
+  avisoTurrones: "Pedidos con anticipación. Coordinamos la fecha y la forma de entrega por WhatsApp.",
 };
 
 
@@ -136,5 +146,42 @@ const PRODUCTOS = [
     descripcion: "Set de 4 posavasos tejidos a crochet en forma de flor, distintos colores.",
     destacado: false,
     disponible: false,
+  },
+];
+
+
+/* ------------------------------------------------------------
+   4) TURRONES (página aparte: turrones.html)
+   Funciona igual que los productos de arriba, pero sin categorías.
+   OJO: los dos de abajo son EJEMPLOS. Cámbialos por los reales
+   (nombre, precio, presentación) o bórralos.
+
+   Campos:
+     id           -> texto único, sin espacios
+     nombre       -> nombre del turrón
+     precio       -> solo el número, sin "S/"
+     presentacion -> cómo se vende (ej: "Caja", "Porción", "Bandeja")
+     imagen       -> archivo dentro de "fotos/"
+     descripcion  -> texto corto
+     disponible   -> true / false (false lo muestra como "Agotado")
+   ------------------------------------------------------------ */
+const TURRONES = [
+  {
+    id: "turron-ejemplo-01",
+    nombre: "Turrón de ejemplo 1",
+    precio: 25,
+    presentacion: "Porción",
+    imagen: "placeholder.jpg",
+    descripcion: "Cambia este texto por la descripción real de tu turrón.",
+    disponible: true,
+  },
+  {
+    id: "turron-ejemplo-02",
+    nombre: "Turrón de ejemplo 2",
+    precio: 40,
+    presentacion: "Caja",
+    imagen: "placeholder.jpg",
+    descripcion: "Cambia este texto por la descripción real de tu turrón.",
+    disponible: true,
   },
 ];

@@ -48,7 +48,15 @@
     if (anio) anio.textContent = new Date().getFullYear();
 
     const statPiezas = document.getElementById("statPiezas");
-    if (statPiezas) statPiezas.textContent = PRODUCTOS.length;
+    if (statPiezas) statPiezas.textContent = PRODUCTOS.filter((p) => p.disponible !== false).length;
+
+    const btnEncargo = document.getElementById("whatsappEncargo");
+    if (btnEncargo) btnEncargo.href = urlWhatsapp(CONFIG.mensajeWhatsappEncargo);
+
+    // Enlaces a la página de turrones: se esconden si turronesActivo es false
+    if (CONFIG.turronesActivo === false) {
+      document.querySelectorAll("[data-turrones]").forEach((el) => { el.hidden = true; });
+    }
   }
 
   /* ---------- Filtros de categoría ---------- */
@@ -321,6 +329,40 @@
     window.addEventListener("resize", actualizar);
   }
 
+  /* ---------- Datos para Google (no se ven en la página) ---------- */
+  function inyectarDatosEstructurados() {
+    const absoluta = (archivo) => new URL(RUTA_IMAGENES + archivo, window.location.href).href;
+    const datos = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Store",
+          name: "Rosa de Lana",
+          description: "Tejidos artesanales hechos a mano: carteras, amigurumis y accesorios.",
+          areaServed: "Lima, Perú",
+          url: window.location.href.split("#")[0],
+          sameAs: [CONFIG.instagramUrl],
+        },
+        ...PRODUCTOS.map((p) => ({
+          "@type": "Product",
+          name: p.nombre,
+          description: p.descripcion || p.nombre,
+          image: absoluta(listaImagenes(p)[0]),
+          offers: {
+            "@type": "Offer",
+            price: String(p.precio),
+            priceCurrency: "PEN",
+            availability: p.disponible !== false ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
+          },
+        })),
+      ],
+    };
+    const s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.textContent = JSON.stringify(datos);
+    document.head.appendChild(s);
+  }
+
   /* ---------- Inicio ---------- */
   document.addEventListener("DOMContentLoaded", () => {
     pintarConfiguracionGeneral();
@@ -331,5 +373,6 @@
     activarHeaderScroll();
     activarBarraSeleccion();
     activarModal();
+    inyectarDatosEstructurados();
   });
 })();

@@ -263,7 +263,7 @@ ul { padding: 0; margin: 0; list-style: none; }
   border-radius: 4px;
 }
 
-.nav { display: flex; align-items: center; gap: 34px; filter: drop-shadow(0 1px 10px rgba(43, 29, 27, 0.35));}
+.nav { display: flex; align-items: center; gap: 34px; filter: drop-shadow(0 2px 10px rgba(43, 29, 27, 0.35));}
 .nav a {
   font-weight: 700;
   font-size: 0.8rem;
@@ -897,3 +897,95 @@ ul { padding: 0; margin: 0; list-style: none; }
   .hero-parrafo { margin: 0 0 36px !important; }
   .hero-firma { align-self: center !important; }
 }
+
+
+/* ============================================================
+   Mejoras v3: Cómo comprar, Encargos, Turrones
+   ============================================================ */
+#como-comprar, #encargos { scroll-margin-top: 90px; }
+.nav { gap: 26px; }
+
+/* --- Cómo comprar --- */
+.comprar { background: var(--blanco-hilo); padding: 80px 0; }
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  margin: 0 0 56px;
+  padding: 0;
+  list-style: none;
+}
+.paso { text-align: center; }
+.paso-numero {
+  display: block;
+  font-family: var(--fuente-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 3.2rem;
+  line-height: 1;
+  color: var(--rosa-oscuro);
+  margin-bottom: 10px;
+}
+.paso h3 {
+  font-family: var(--fuente-display);
+  font-weight: 600;
+  font-size: 1.45rem;
+  margin: 0 0 8px;
+}
+.paso p { color: var(--cafe-suave); margin: 0 auto; max-width: 34ch; }
+
+.info-compra {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  border-top: 1px solid rgba(43,29,27,0.12);
+  padding-top: 32px;
+}
+.info-compra-bloque h3 {
+  font-family: var(--fuente-cuerpo);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lana-tostado);
+  margin: 0 0 6px;
+}
+.info-compra-bloque p { margin: 0; color: var(--cafe-suave); font-size: 0.95rem; }
+
+@media (max-width: 760px) {
+  .pasos, .info-compra { grid-template-columns: 1fr; gap: 28px; }
+  .comprar { padding: 60px 0; }
+}
+
+/* --- Encargos --- */
+.encargos {
+  background: var(--lana-crema-alt);
+  padding: 80px 0;
+  text-align: center;
+}
+.encargos .subtitulo-seccion { margin-bottom: 28px; }
+
+/* --- Footer: enlaces --- */
+.footer-links { margin: 10px 0 0; font-size: 0.9rem; }
+.footer-links a { border-bottom: 1px solid var(--lana-tostado); }
+.footer-links a:hover { color: var(--rosa-claro); }
+
+/* --- Página de turrones --- */
+.turrones-cabecera { padding: 140px 0 20px; text-align: center; }
+.turrones-aviso {
+  max-width: 56ch;
+  margin: 0 auto 44px;
+  padding: 14px 20px;
+  background: var(--blanco-hilo);
+  border-left: 3px solid var(--lana-tostado);
+  color: var(--cafe-suave);
+  text-align: left;
+}
+.turrones-lista { padding-bottom: 90px; }
+.tarjeta-turron { cursor: default; display: flex; flex-direction: column; }
+.tarjeta-presentacion { font-size: 0.82rem; color: var(--cafe-suave); margin: 0 0 6px; }
+.tarjeta-descripcion { font-size: 0.9rem; color: var(--cafe-suave); margin: 0 0 14px; flex-grow: 1; }
+.tarjeta-turron .boton { padding: 11px 18px; font-size: 0.72rem; }
+.tarjeta-turron .boton[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+.turrones-volver { text-align: center; padding-bottom: 60px; }
+.turrones-volver a { border-bottom: 2px solid var(--lana-tostado); font-weight: 700; padding-bottom: 2px; }
