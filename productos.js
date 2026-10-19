@@ -291,7 +291,7 @@ const PRODUCTOS = [
     nombre: "Amigurumi Vaca Escocesa, Cuy y Alf",
     categoria: "amigurumis",
     precio: 0,
-    imagen: "amigurumis/amigurumi-vaca-escocesa-cuy-alf.jpeg",
+    imagen: "amigurumis/amigurumi-vaca-escosesa-cuy-alf.jpeg",
     descripcion: "Amigurumi tejido a mano. Pieza única.",
     destacado: false,
     disponible: true,
