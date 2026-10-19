@@ -989,3 +989,153 @@ ul { padding: 0; margin: 0; list-style: none; }
 .tarjeta-turron .boton[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
 .turrones-volver { text-align: center; padding-bottom: 60px; }
 .turrones-volver a { border-bottom: 2px solid var(--lana-tostado); font-weight: 700; padding-bottom: 2px; }
+
+
+/* ============================================================
+   v4 — Estilo cálido "papel crema + cobre"
+   Va al final a propósito: reemplaza colores y formas de arriba.
+   ============================================================ */
+:root {
+  --rosa-oscuro: #8E4E2E;        /* cobre: títulos y acentos */
+  --rosa-oscuro-hover: #733D22;
+  --lana-crema: #F8EBDD;
+  --lana-crema-alt: #F0DFCB;
+  --blanco-hilo: #FFFBF5;
+  --cafe-profundo: #4A2A22;      /* marrón rojizo para textos de tarjetas */
+  --cafe-suave: #8A6652;
+  --linea-suave: #EAD3BC;
+  --sombra-tarjeta: 0 8px 22px -10px rgba(90, 50, 30, 0.4);
+}
+
+/* Fondo crema con textura sutil de papel */
+body {
+  background-color: var(--lana-crema);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .02' numOctaves='4' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .4 0 0 0 0 .28 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.hilo-decorativo { opacity: 0.25; }
+
+/* --- Títulos --- */
+.titulo-seccion {
+  font-weight: 500;
+  font-size: clamp(2.4rem, 4.6vw, 3.5rem);
+  color: var(--rosa-oscuro);
+  letter-spacing: 0.005em;
+}
+.subtitulo-seccion { color: var(--cafe-suave); }
+.eyebrow { color: #B07A4A; }
+
+/* --- Header: links suaves y botón de contorno --- */
+.site-header.encabezado-solido {
+  background: rgba(248, 235, 221, 0.9);
+  border-bottom: 1px solid rgba(142, 78, 46, 0.1);
+}
+.site-header.encabezado-solido .nav a {
+  color: #9A6B4F;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+}
+.site-header.encabezado-solido .nav a:not(.nav-cta):hover { color: var(--rosa-oscuro); }
+.nav a:not(.nav-cta)::after { background: var(--rosa-oscuro); }
+.nav a.nav-cta { border-radius: 6px; }
+.site-header.encabezado-solido .nav a.nav-cta {
+  background: rgba(255, 252, 247, 0.5);
+  color: var(--rosa-oscuro);
+  border: 1px solid var(--linea-suave);
+}
+.site-header.encabezado-solido .nav a.nav-cta:hover {
+  background: var(--rosa-oscuro);
+  color: var(--blanco-hilo);
+}
+.logo { border-radius: 2px; background: #fff; }
+
+/* --- Botones más suaves --- */
+.boton, .boton-hero-primario, .boton-hero-fantasma { border-radius: 8px; }
+
+/* --- Filtros en píldoras suaves --- */
+.filtros { gap: 12px; margin-bottom: 22px; }
+.filtro-boton {
+  background: #F4E4D2;
+  border: 1px solid var(--linea-suave);
+  color: var(--cafe-profundo);
+  padding: 8px 22px;
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+}
+.filtro-boton:hover { background: #EFDAC3; }
+.filtro-boton.activo {
+  background: var(--blanco-hilo);
+  color: var(--cafe-profundo);
+  border-color: var(--linea-suave);
+  box-shadow: 0 2px 8px -3px rgba(90, 50, 30, 0.3);
+}
+
+/* --- Buscador --- */
+.buscador input {
+  border: 1px solid var(--linea-suave);
+  background: rgba(255, 252, 247, 0.55);
+  padding: 11px 20px;
+  font-size: 0.85rem;
+}
+.buscador input::placeholder { color: #C9A98C; }
+.buscador input:focus { border-color: var(--rosa-oscuro); outline: none; background: var(--blanco-hilo); }
+
+/* --- Tarjetas: esquinas redondeadas, sombra suave, texto abajo --- */
+.tarjeta-producto {
+  background: linear-gradient(180deg, #F9EBDD 0%, #FFFBF6 100%);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--sombra-tarjeta);
+  padding-bottom: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.tarjeta-producto:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px -12px rgba(90, 50, 30, 0.45);
+}
+.tarjeta-imagen { aspect-ratio: 1 / 1; margin-bottom: 14px; }
+.tarjeta-categoria,
+.tarjeta-nombre,
+.tarjeta-descripcion,
+.tarjeta-precio { padding: 0 18px; }
+.tarjeta-categoria {
+  color: var(--cafe-profundo);
+  font-weight: 600;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+}
+.tarjeta-nombre {
+  color: var(--cafe-profundo);
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+.tarjeta-precio {
+  color: var(--cafe-profundo);
+  font-size: 1.2rem;
+}
+.tarjeta-turron .boton { margin: 0 18px; }
+.cinta-destacado { border-radius: 4px; }
+
+@media (max-width: 640px) {
+  .tarjeta-categoria,
+  .tarjeta-nombre,
+  .tarjeta-descripcion,
+  .tarjeta-precio { padding: 0 12px; }
+  .tarjeta-turron .boton { margin: 0 12px; }
+  .tarjeta-nombre { font-size: 0.85rem; }
+  .tarjeta-precio { font-size: 1.05rem; }
+}
+
+/* --- Modal --- */
+.modal-caja { border-radius: 14px; overflow: hidden auto; }
+.modal-precio { color: var(--cafe-profundo); }
+
+/* --- Otras secciones, mismo lenguaje --- */
+.comprar { background: rgba(255, 251, 245, 0.75); }
+.encargos { background: rgba(240, 223, 203, 0.7); }
+.turrones-aviso { border-radius: 8px; border-left-color: #B07A4A; }
+.info-compra-bloque h3,
+.lista-valores li strong { color: #B07A4A; }
+.paso-numero { color: var(--rosa-oscuro); }
+.barra-seleccion { border-radius: 14px 14px 0 0; }
