@@ -296,6 +296,18 @@ const PRODUCTOS = [
     destacado: false,
     disponible: true,
   },
+  {
+    id: "osito-paddintong",
+    nombre: "osito Paddintong",
+    categoria: "amigurumis",
+    precio: 180,
+    imagen: "amigurumis/osito-paddintong.jpeg",
+    descripcion: "Osisto hecho a mano, tejido a mano con estilo amigurumi, con todos los detalles característicos del personaje. Clásico sombrero rojo y un abrigo azul con cierres en botones y cordones en color crema, botas rojas y un pequeño maletín.",
+    medidas: "20 cm de alto",
+    materiales: "algodón",
+    destacado: true,
+    disponible: true,
+  },
 ];
 
 
