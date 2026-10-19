@@ -1152,3 +1152,12 @@ body {
    El catálogo conserva el recorte uniforme para que la cuadrícula se vea ordenada. */
 .modal-imagen-principal img,
 .modal-miniatura img { object-fit: contain; background: var(--lana-crema-alt); }
+
+
+/* --- Comidas: datos de cada plato --- */
+.tarjeta-meta { margin: 0 0 12px; padding: 0 18px; display: flex; flex-direction: column; gap: 4px; }
+.tarjeta-meta li { font-size: 0.82rem; color: var(--cafe-suave); }
+.tarjeta-meta strong { font-size: 0.64rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #B07A4A; margin-right: 6px; }
+.tarjeta-turron .tarjeta-precio { margin-bottom: 12px; }
+#filtrosComidas { margin-bottom: 34px; }
+@media (max-width: 640px) { .tarjeta-meta { padding: 0 12px; } }

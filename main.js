@@ -53,9 +53,9 @@
     const btnEncargo = document.getElementById("whatsappEncargo");
     if (btnEncargo) btnEncargo.href = urlWhatsapp(CONFIG.mensajeWhatsappEncargo);
 
-    // Enlaces a la página de turrones: se esconden si turronesActivo es false
-    if (CONFIG.turronesActivo === false) {
-      document.querySelectorAll("[data-turrones]").forEach((el) => { el.hidden = true; });
+    // Enlaces a la página de comidas: se esconden si comidasActivo es false
+    if (CONFIG.comidasActivo === false) {
+      document.querySelectorAll("[data-comidas]").forEach((el) => { el.hidden = true; });
     }
   }
 

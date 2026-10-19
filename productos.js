@@ -37,12 +37,12 @@ const CONFIG = {
   // Mensaje del botón "Contar mi idea" (encargos a medida)
   mensajeWhatsappEncargo: "¡Hola! Me gustaría encargar una pieza tejida a mi gusto. Les cuento mi idea 🌸",
 
-  // Turrones (página aparte: turrones.html)
-  // Pon false cuando no sea temporada: se esconde la página y todos sus enlaces.
-  turronesActivo: true,
-  mensajeWhatsappTurron: "¡Hola! Vi «{producto}» ({precio}) en la página de turrones de Rosa de Lana y quisiera hacer un pedido 🍬",
-  // Texto que aparece arriba de los turrones (fechas, pedido mínimo, etc.)
-  avisoTurrones: "Pedidos con anticipación. Coordinamos la fecha y la forma de entrega por WhatsApp.",
+  // Comidas (página aparte: comidas.html)
+  // Pon false para esconder la página y todos sus enlaces.
+  comidasActivo: true,
+  mensajeWhatsappComida: "¡Hola! Vi «{producto}» ({precio}) en la sección de comidas de Rosa de Lana y quisiera hacer un pedido 🍽️ Lo necesitaría para el día: ",
+  // Texto que aparece arriba de las comidas (anticipación, entrega, etc.)
+  avisoComidas: "Todo se prepara por encargo. Coordinamos fecha, cantidad y forma de entrega por WhatsApp.",
 };
 
 
@@ -324,39 +324,50 @@ const PRODUCTOS = [
 
 
 /* ------------------------------------------------------------
-   4) TURRONES (página aparte: turrones.html)
-   Funciona igual que los productos de arriba, pero sin categorías.
-   OJO: los dos de abajo son EJEMPLOS. Cámbialos por los reales
-   (nombre, precio, presentación) o bórralos.
-
-   Las fotos de turrones van en la carpeta "fotos/comida/".
-   Ejemplo: imagen: "comidas/turron.jpeg"
+   4) COMIDAS (página aparte: comidas.html)
+   Pasteles salados, turrones y lo que quieras agregar. Se prepara
+   por encargo. Copia un bloque, cambia los datos y listo.
+   Las fotos van en la carpeta "fotos/comida/".
 
    Campos:
      id           -> texto único, sin espacios
-     nombre       -> nombre del turrón
-     precio       -> solo el número, sin "S/"
-     presentacion -> cómo se vende (ej: "Caja", "Porción", "Bandeja")
+     nombre       -> nombre de la comida
+     categoria    -> un "id" de CATEGORIAS_COMIDAS
+     precio       -> solo el número (con 0 se muestra "Consultar precio")
+     presentacion -> ej: "Pastel entero", "Porción en caja"
+     porciones    -> OPCIONAL, ej: "8 porciones"
+     anticipacion -> OPCIONAL, ej: "Pedir con 2 días de anticipación"
+     ingredientes -> OPCIONAL, ej: "Acelgas, queso, huevo"
      imagen       -> "comida/" + nombre del archivo
      descripcion  -> texto corto
-     disponible   -> true / false (false lo muestra como "Agotado")
+     disponible   -> true / false
    ------------------------------------------------------------ */
-const TURRONES = [
+const CATEGORIAS_COMIDAS = [
+  { id: "pasteles", nombre: "Pasteles salados" },
+  { id: "turrones", nombre: "Turrones" },
+];
+
+const COMIDAS = [
   {
-    id: "turron-ejemplo-01",
-    nombre: "Turrón de 400 gr",
-    precio: 27,
-    presentacion: "Porción en caja",
-    imagen: "comidas/turron.jpeg",
-    descripcion: "Cambia este texto por la descripción real de tu turrón.",
+    id: "pastel-acelgas-ejemplo",
+    nombre: "Pastel de acelgas",
+    categoria: "pasteles",
+    precio: 0,
+    presentacion: "Pastel entero",
+    porciones: "8 porciones",
+    anticipacion: "Pedir con 2 días de anticipación",
+    ingredientes: "Acelgas, queso, huevo",
+    imagen: "placeholder.jpg",
+    descripcion: "EJEMPLO: cambia este texto, el precio y la foto por los reales.",
     disponible: true,
   },
   {
-    id: "turron-ejemplo-02",
-    nombre: "Turrón de ejemplo 2",
-    precio: 40,
-    presentacion: "Caja",
-    imagen: "placeholder.jpg",
+    id: "turron-ejemplo-01",
+    nombre: "Turrón de 400 gr",
+    categoria: "turrones",
+    precio: 27,
+    presentacion: "Porción en caja",
+    imagen: "comida/turron.jpeg",
     descripcion: "Cambia este texto por la descripción real de tu turrón.",
     disponible: true,
   },

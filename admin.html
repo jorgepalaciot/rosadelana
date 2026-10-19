@@ -8,6 +8,7 @@
 <style>
   :root{--rosa:#8C3A52;--crema:#F4EBDC;--cafe:#2B1D1B;--suave:#5C4A42;--blanco:#FFFCF7;--tostado:#C98A3F}
   *{box-sizing:border-box}
+  [hidden]{display:none!important}
   body{margin:0;background:var(--crema);color:var(--cafe);font-family:'Nunito Sans',system-ui,sans-serif;line-height:1.5}
   main{max-width:560px;margin:0 auto;padding:28px 18px 60px}
   h1{font-family:Georgia,serif;font-weight:600;color:var(--rosa);margin:0 0 4px}
@@ -59,6 +60,9 @@
   <p class="sub">Llena los datos y se publica en la web en 1–2 minutos.</p>
 
   <form id="form">
+    <label for="tipo">¿Qué vas a publicar?</label>
+    <select id="tipo"><option value="tejido">Tejido</option><option value="comida">Comida</option></select>
+
     <label for="nombre">Nombre</label>
     <input id="nombre" required placeholder="Ej. Cartera Lila con asa larga">
 
@@ -69,11 +73,23 @@
         <input id="precio" type="number" min="0" step="0.5" required></div>
     </div>
 
+    <div class="solo-tejido">
     <label for="medidas">Medidas</label>
     <input id="medidas" placeholder="Ej. 25 x 18 x 8 cm">
 
     <label for="materiales">Materiales</label>
     <input id="materiales" placeholder="Ej. Lana 100% algodón, forro de tela">
+    </div>
+    <div class="solo-comida" hidden>
+    <label for="presentacion">Presentación</label>
+    <input id="presentacion" placeholder="Ej. Pastel entero">
+    <label for="porciones">Porciones</label>
+    <input id="porciones" placeholder="Ej. 8 porciones">
+    <label for="anticipacion">Anticipación</label>
+    <input id="anticipacion" placeholder="Ej. Pedir con 2 días de anticipación">
+    <label for="ingredientes">Ingredientes</label>
+    <input id="ingredientes" placeholder="Ej. Acelgas, queso, huevo">
+    </div>
 
     <label for="descripcion">Descripción</label>
     <textarea id="descripcion" rows="3" placeholder="Texto corto sobre la pieza"></textarea>
@@ -103,7 +119,7 @@
       </div>
     </div>
 
-    <label class="check"><input type="checkbox" id="destacado"> Destacado (aparece primero en el catálogo)</label>
+    <label class="check solo-tejido"><input type="checkbox" id="destacado"> Destacado (aparece primero en el catálogo)</label>
     <label class="check"><input type="checkbox" id="disponible" checked> Disponible</label>
 
     <button id="enviar" type="submit">Publicar producto</button>
@@ -206,6 +222,20 @@ $("fotos").addEventListener("change", () => {
   pintarPrevias();
 });
 
+/* ---------- Tipo: tejido o comida ---------- */
+const CATS = {
+  tejido: [["carteras", "Carteras"], ["amigurumis", "Amigurumis"], ["accesorios", "Accesorios"], ["otros", "Otros"]],
+  comida: [["pasteles", "Pasteles salados"], ["turrones", "Turrones"]],
+};
+function cambiarTipo() {
+  const t = $("tipo").value;
+  $("categoria").innerHTML = CATS[t].map(([v, n]) => `<option value="${v}">${n}</option>`).join("");
+  document.querySelectorAll(".solo-tejido").forEach((e) => (e.hidden = t !== "tejido"));
+  document.querySelectorAll(".solo-comida").forEach((e) => (e.hidden = t !== "comida"));
+  pintarVista();
+}
+$("tipo").addEventListener("change", cambiarTipo);
+
 /* ---------- Publicar ---------- */
 $("form").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -227,23 +257,24 @@ $("form").addEventListener("submit", async (e) => {
     let id = base, n = 2;
     while (txt.includes(`id: "${id}"`)) id = base + "-" + n++;
 
-    const files = fotos, rutas = [];
+    const tipo = $("tipo").value, files = tipo === "comida" ? fotos.slice(0, 1) : fotos, rutas = [];
     for (let i = 0; i < files.length; i++) {
       log(`Subiendo foto ${i + 1} de ${files.length}…`);
-      const ruta = `${cat}/${id}${files.length > 1 ? "-" + (i + 1) : ""}.jpeg`;
+      const ruta = `${tipo === "comida" ? "comida" : cat}/${id}${files.length > 1 ? "-" + (i + 1) : ""}.jpeg`;
       const put = await api("fotos/" + ruta, { method: "PUT", body: JSON.stringify({ message: "Foto: " + id, content: await reducir(files[i]), branch: RAMA }) });
       if (!put.ok) throw new Error("No pude subir la foto " + (i + 1) + " (" + put.status + ").");
       rutas.push(ruta);
     }
 
     let b = `  {\n    id: ${q(id)},\n    nombre: ${q(nombre)},\n    categoria: ${q(cat)},\n    precio: ${Number($("precio").value) || 0},\n    imagen: ${q(rutas[0])},\n`;
-    if (rutas.length > 1) b += `    imagenes: ${JSON.stringify(rutas)},\n`;
-    b += `    descripcion: ${q($("descripcion").value.trim() || "Tejido a mano. Pieza única.")},\n`;
-    if ($("medidas").value.trim()) b += `    medidas: ${q($("medidas").value.trim())},\n`;
-    if ($("materiales").value.trim()) b += `    materiales: ${q($("materiales").value.trim())},\n`;
-    b += `    destacado: ${$("destacado").checked},\n    disponible: ${$("disponible").checked},\n  },\n`;
+    if (tipo === "tejido" && rutas.length > 1) b += `    imagenes: ${JSON.stringify(rutas)},\n`;
+    b += `    descripcion: ${q($("descripcion").value.trim() || (tipo === "comida" ? "Preparado por encargo." : "Tejido a mano. Pieza única."))},\n`;
+    if (tipo === "tejido" && $("medidas").value.trim()) b += `    medidas: ${q($("medidas").value.trim())},\n`;
+    if (tipo === "tejido" && $("materiales").value.trim()) b += `    materiales: ${q($("materiales").value.trim())},\n`;
+    if (tipo === "comida") for (const k of ["presentacion", "porciones", "anticipacion", "ingredientes"]) if ($(k).value.trim()) b += `    ${k}: ${q($(k).value.trim())},\n`;
+    b += (tipo === "tejido" ? `    destacado: ${$("destacado").checked},\n` : "") + `    disponible: ${$("disponible").checked},\n  },\n`;
 
-    const pos = txt.lastIndexOf("];", txt.indexOf("const TURRONES"));
+    const pos = tipo === "comida" ? txt.lastIndexOf("];") : txt.lastIndexOf("];", txt.indexOf("const CATEGORIAS_COMIDAS"));
     if (pos < 0) throw new Error("No encontré dónde insertar el producto en productos.js.");
     txt = txt.slice(0, pos) + b + txt.slice(pos);
 
@@ -252,7 +283,7 @@ $("form").addEventListener("submit", async (e) => {
     if (!fin.ok) throw new Error("No pude guardar productos.js (" + fin.status + "). Si alguien más editó el archivo, vuelve a intentar.");
 
     log("✓ Listo. En 1–2 minutos aparece en la web.", "ok");
-    $("form").reset(); fotos = []; $("vista").dataset.f = ""; pintarPrevias(); $("disponible").checked = true;
+    $("form").reset(); fotos = []; $("vista").dataset.f = ""; pintarPrevias(); $("disponible").checked = true; cambiarTipo();
   } catch (err) {
     log(err.message, "error");
   }
