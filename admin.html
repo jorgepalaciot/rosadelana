@@ -19,9 +19,17 @@
   .fila{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .check{display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-size:.95rem;margin:14px 0 0}
   .check input{width:auto}
-  #previas{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-  #previas img{width:72px;height:72px;object-fit:cover;border-radius:8px}
-  button{margin-top:22px;width:100%;padding:14px;border:0;border-radius:4px;background:var(--rosa);color:#fff;font:800 .85rem inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+
+  /* Previsualización de fotos */
+  #previas{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .prev{position:relative;width:84px;height:84px}
+  .prev img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+  #previas button{position:absolute;margin:0;width:24px;height:24px;padding:0;border-radius:50%;font-family:system-ui,sans-serif;font-weight:700;font-size:.75rem;letter-spacing:0;line-height:24px;background:rgba(43,29,27,.8)}
+  #previas .x{top:-6px;right:-6px}
+  #previas .star{bottom:-6px;right:-6px;background:var(--tostado)}
+  .prev .tag{position:absolute;left:4px;bottom:4px;background:var(--rosa);color:#fff;font-size:.65rem;font-weight:700;padding:2px 6px;border-radius:4px}
+
+  button{margin-top:22px;width:100%;padding:14px;border:0;border-radius:4px;background:var(--rosa);color:#fff;font-family:inherit;font-weight:800;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
   button:disabled{opacity:.5}
   #estado{margin-top:16px;font-weight:700}
   #estado.ok{color:#2e7d32}#estado.error{color:#b3261e}
@@ -54,8 +62,9 @@
     <label for="descripcion">Descripción</label>
     <textarea id="descripcion" rows="3" placeholder="Texto corto sobre la pieza"></textarea>
 
-    <label for="fotos">Fotos (la primera es la principal)</label>
-    <input id="fotos" type="file" accept="image/*" multiple required>
+    <label for="fotos">Fotos (frente, costado, detalle…)</label>
+    <input id="fotos" type="file" accept="image/*" multiple>
+    <small>Puedes agregar varias, de una en una o juntas. Toca ★ para hacer principal una foto.</small>
     <div id="previas"></div>
 
     <label class="check"><input type="checkbox" id="destacado"> Destacado</label>
@@ -79,10 +88,17 @@ const $ = (id) => document.getElementById(id);
 $("token").value = localStorage.getItem("rdl_token") || "";
 if (!$("token").value) document.querySelector("details").open = true;
 
-const api = (ruta, op = {}) => fetch(`https://api.github.com/repos/${REPO}/contents/${ruta}`, {
-  ...op,
-  headers: { Authorization: "Bearer " + $("token").value.trim(), Accept: "application/vnd.github+json", "Content-Type": "application/json" },
-});
+// Llamada a la API de GitHub. Si el navegador no logra conectar, el mensaje dice qué paso falló.
+const api = async (ruta, op = {}) => {
+  try {
+    return await fetch(`https://api.github.com/repos/${REPO}/contents/${ruta}`, {
+      ...op,
+      headers: { Authorization: "Bearer " + $("token").value.trim(), Accept: "application/vnd.github+json", "Content-Type": "application/json" },
+    });
+  } catch (e) {
+    throw new Error(`Sin conexión con GitHub (${op.method || "GET"} ${ruta}). Revisa extensiones, VPN o la consola (F12).`);
+  }
+};
 const slug = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const dec = (b64) => new TextDecoder().decode(Uint8Array.from(atob(b64), (c) => c.charCodeAt(0)));
 const enc = (txt) => { let s = ""; new TextEncoder().encode(txt).forEach((b) => (s += String.fromCharCode(b))); return btoa(s); };
@@ -98,11 +114,46 @@ async function reducir(archivo) {
   return await new Promise((r) => { const f = new FileReader(); f.onload = () => r(f.result.split(",")[1]); f.readAsDataURL(blob); });
 }
 
+/* ---------- Fotos: agregar de a una, quitar, elegir principal ---------- */
+let fotos = [];
+
+function pintarPrevias() {
+  const cont = $("previas");
+  cont.innerHTML = "";
+  fotos.forEach((f, i) => {
+    const d = document.createElement("div");
+    d.className = "prev";
+    const im = new Image();
+    im.src = URL.createObjectURL(f);
+    d.appendChild(im);
+
+    if (i === 0) {
+      const t = document.createElement("span");
+      t.className = "tag"; t.textContent = "Principal";
+      d.appendChild(t);
+    } else {
+      const s = document.createElement("button");
+      s.type = "button"; s.className = "star"; s.textContent = "★"; s.title = "Hacer principal";
+      s.onclick = () => { fotos.unshift(fotos.splice(i, 1)[0]); pintarPrevias(); };
+      d.appendChild(s);
+    }
+
+    const x = document.createElement("button");
+    x.type = "button"; x.className = "x"; x.textContent = "✕"; x.title = "Quitar";
+    x.onclick = () => { fotos.splice(i, 1); pintarPrevias(); };
+    d.appendChild(x);
+
+    cont.appendChild(d);
+  });
+}
+
 $("fotos").addEventListener("change", () => {
-  $("previas").innerHTML = "";
-  [...$("fotos").files].forEach((f) => { const i = new Image(); i.src = URL.createObjectURL(f); $("previas").appendChild(i); });
+  fotos.push(...$("fotos").files);
+  $("fotos").value = "";   // permite volver a elegir la misma foto
+  pintarPrevias();
 });
 
+/* ---------- Publicar ---------- */
 $("form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const estado = $("estado"), log = (m, c = "") => { estado.textContent = m; estado.className = c; };
@@ -110,6 +161,7 @@ $("form").addEventListener("submit", async (e) => {
   try {
     const tk = $("token").value.trim();
     if (!tk) { document.querySelector("details").open = true; throw new Error("Falta el token de GitHub."); }
+    if (fotos.length === 0) throw new Error("Agrega al menos una foto.");
     localStorage.setItem("rdl_token", tk);
 
     log("Leyendo el catálogo…");
@@ -122,12 +174,12 @@ $("form").addEventListener("submit", async (e) => {
     let id = base, n = 2;
     while (txt.includes(`id: "${id}"`)) id = base + "-" + n++;
 
-    const files = [...$("fotos").files], rutas = [];
+    const files = fotos, rutas = [];
     for (let i = 0; i < files.length; i++) {
       log(`Subiendo foto ${i + 1} de ${files.length}…`);
       const ruta = `${cat}/${id}${files.length > 1 ? "-" + (i + 1) : ""}.jpeg`;
       const put = await api("fotos/" + ruta, { method: "PUT", body: JSON.stringify({ message: "Foto: " + id, content: await reducir(files[i]), branch: RAMA }) });
-      if (!put.ok) throw new Error("No pude subir la foto (" + put.status + ").");
+      if (!put.ok) throw new Error("No pude subir la foto " + (i + 1) + " (" + put.status + ").");
       rutas.push(ruta);
     }
 
@@ -147,7 +199,7 @@ $("form").addEventListener("submit", async (e) => {
     if (!fin.ok) throw new Error("No pude guardar productos.js (" + fin.status + "). Si alguien más editó el archivo, vuelve a intentar.");
 
     log("✓ Listo. En 1–2 minutos aparece en la web.", "ok");
-    $("form").reset(); $("previas").innerHTML = ""; $("disponible").checked = true;
+    $("form").reset(); fotos = []; pintarPrevias(); $("disponible").checked = true;
   } catch (err) {
     log(err.message, "error");
   }
