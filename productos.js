@@ -70,82 +70,231 @@ const CATEGORIAS = [
      nombre       -> nombre del producto
      categoria    -> debe coincidir con un "id" de CATEGORIAS
      precio       -> solo el número, sin "S/" (ej: 85, no "85 soles")
-     imagen       -> nombre del archivo de foto, guardado dentro de la
-                     carpeta "fotos/", ej: "cartera-negra-01.jpg"
+     imagen       -> subcarpeta + nombre del archivo, dentro de "fotos/".
+                     Ejemplos: "carteras/cartera-negra.jpeg"
+                               "amigurumis/amigurumi-pikachu.jpeg"
                      (se usa como foto principal / única si no agregas "imagenes")
      imagenes     -> OPCIONAL. Si quieres mostrar varias fotos del mismo
                      producto (para que la gente vea más ángulos al hacer
                      clic), agrega esta lista en vez de una sola "imagen":
-                       imagenes: ["cartera-negra-01.jpg", "cartera-negra-02.jpg", "cartera-negra-03.jpg"],
+                       imagenes: ["carteras/cartera-negra.jpeg", "carteras/cartera-negra-2.jpeg"],
                      Si no la agregas, no pasa nada — se usa "imagen" sola.
      descripcion  -> texto corto describiendo la pieza (aparece en el
                      detalle al hacer clic en el producto)
      destacado    -> true / false — true lo resalta con una cinta "Destacado"
      disponible   -> true / false — false lo muestra como "Vendido" y no se puede consultar
 
-   TIP: si aún no tienes la foto lista, usa "placeholder.jpg" (ya está
-   incluida dentro de la carpeta "fotos/") y cámbiala después.
+   CARPETAS dentro de "fotos/":
+     fotos/carteras/     -> carteras
+     fotos/amigurumis/   -> amigurumis
+     fotos/comida/       -> turrones y comida
+
+   IMPORTANTE: todos los precios están en 0. Cámbialos por los reales.
    ------------------------------------------------------------ */
 const PRODUCTOS = [
+
+  /* ===================== CARTERAS ===================== */
   {
-    id: "cartera-crochet-terracota",
-    nombre: "Cartera Crochet Terracota",
+    id: "cartera-blanca",
+    nombre: "Cartera Blanca",
     categoria: "carteras",
-    precio: 89,
-    imagen: "placeholder.jpg",
-    descripcion: "Cartera tejida a crochet en tonos terracota, con forro interno y cierre de madera. Pieza única, tejida punto por punto.",
-    destacado: true,
+    precio: 0,
+    imagen: "carteras/cartera-blanca.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
+    destacado: false,
     disponible: true,
   },
   {
-    id: "amigurumi-pulpo-lila",
-    nombre: "Amigurumi Pulpo Lila",
-    categoria: "amigurumis",
-    precio: 45,
-    imagen: "placeholder.jpg",
-    descripcion: "Pulpito tejido a mano en lana suave, ideal para regalar o decorar. Relleno hipoalergénico.",
-    destacado: true,
-    disponible: true,
-  },
-  {
-    id: "cartera-mini-beige",
-    nombre: "Mini Cartera Beige",
+    id: "cartera-caracol-marron",
+    nombre: "Cartera Caracol Marrón",
     categoria: "carteras",
-    precio: 65,
-    imagen: "placeholder.jpg",
-    descripcion: "Cartera pequeña tipo bolso de mano, tejida en punto alto con asa trenzada.",
+    precio: 0,
+    imagen: "carteras/cartera-caracol-marron.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
     destacado: false,
     disponible: true,
   },
   {
-    id: "amigurumi-oso-miel",
-    nombre: "Amigurumi Oso Miel",
+    id: "cartera-celeste-blanco",
+    nombre: "Cartera Celeste y Blanco",
+    categoria: "carteras",
+    precio: 0,
+    imagen: "carteras/cartera-celeste-blanco.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "cartera-guinda",
+    nombre: "Cartera Guinda",
+    categoria: "carteras",
+    precio: 0,
+    imagen: "carteras/cartera-guinda.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "cartera-mostaza",
+    nombre: "Cartera Mostaza",
+    categoria: "carteras",
+    precio: 0,
+    imagen: "carteras/cartera-mostaza.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "cartera-naranja-roja",
+    nombre: "Cartera Naranja Roja",
+    categoria: "carteras",
+    precio: 0,
+    imagen: "carteras/cartera-narajaroja.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "cartera-negra",
+    nombre: "Cartera Negra",
+    categoria: "carteras",
+    precio: 0,
+    imagen: "carteras/cartera-negra.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "cartera-rayada-rojo-naranja",
+    nombre: "Cartera Rayada Rojo y Naranja",
+    categoria: "carteras",
+    precio: 0,
+    imagen: "carteras/cartera-rayada-rojo-naranja.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "cartera-rayas-blanca-amarilla",
+    nombre: "Cartera Rayas Blanco y Amarillo",
+    categoria: "carteras",
+    precio: 0,
+    imagen: "carteras/cartera-rayas-blanca-amarilla.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "cartera-rayas-blanco-verde-rojo-guinda",
+    nombre: "Cartera Rayas Blanco, Verde, Rojo y Guinda",
+    categoria: "carteras",
+    precio: 0,
+    imagen: "carteras/cartera-rayas-blanco-verde-rojo-guinda.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "cartera-verde",
+    nombre: "Cartera Verde",
+    categoria: "carteras",
+    precio: 0,
+    imagen: "carteras/cartera-verde-1.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "cartera-verde-asas-pulseras",
+    nombre: "Cartera Verde con Asas Pulsera",
+    categoria: "carteras",
+    precio: 0,
+    imagen: "carteras/cartera-verde-azas-pulceras.jpeg",
+    descripcion: "Cartera tejida a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+
+  /* ===================== AMIGURUMIS ===================== */
+  {
+    id: "amigurumi-llama-blanca",
+    nombre: "Amigurumi Llama Blanca",
     categoria: "amigurumis",
-    precio: 40,
-    imagen: "placeholder.jpg",
-    descripcion: "Osito tejido en lana color miel con detalles bordados a mano. Tamaño mediano.",
+    precio: 0,
+    imagen: "amigurumis/amigurumi-llama-blanca.jpeg",
+    descripcion: "Amigurumi tejido a mano. Pieza única.",
     destacado: false,
     disponible: true,
   },
   {
-    id: "chalina-ondas-verde",
-    nombre: "Chalina Ondas Verde Bosque",
-    categoria: "accesorios",
-    precio: 55,
-    imagen: "placeholder.jpg",
-    descripcion: "Chalina tejida en punto ondas, lana 100% suave, ideal para las noches limeñas.",
+    id: "amigurumi-llama-marron",
+    nombre: "Amigurumi Llama Marrón",
+    categoria: "amigurumis",
+    precio: 0,
+    imagen: "amigurumis/amigurumi-llama-marron.jpeg",
+    descripcion: "Amigurumi tejido a mano. Pieza única.",
     destacado: false,
     disponible: true,
   },
   {
-    id: "posavasos-set-flores",
-    nombre: "Set de Posavasos Flores",
-    categoria: "otros",
-    precio: 30,
-    imagen: "placeholder.jpg",
-    descripcion: "Set de 4 posavasos tejidos a crochet en forma de flor, distintos colores.",
+    id: "amigurumi-oso-de-anteojos",
+    nombre: "Amigurumi Oso de Anteojos",
+    categoria: "amigurumis",
+    precio: 0,
+    imagen: "amigurumis/amigurumi-oso-de-anteojos.jpeg",
+    descripcion: "Amigurumi tejido a mano. Pieza única.",
     destacado: false,
-    disponible: false,
+    disponible: true,
+  },
+  {
+    id: "amigurumi-winnie-the-pooh",
+    nombre: "Amigurumi Personaje de Winnie the Pooh",
+    categoria: "amigurumis",
+    precio: 0,
+    imagen: "amigurumis/amigurumi-personajede-winie-de-poo.jpeg",
+    descripcion: "Amigurumi tejido a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "amigurumi-pikachu",
+    nombre: "Amigurumi Pikachu",
+    categoria: "amigurumis",
+    precio: 0,
+    imagen: "amigurumis/amigurumi-pikachu.jpeg",
+    descripcion: "Amigurumi tejido a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "amigurumi-planta-girasol-hada",
+    nombre: "Amigurumi Planta Girasol y Hada",
+    categoria: "amigurumis",
+    precio: 0,
+    imagen: "amigurumis/amigurumi-planta-girasol-amigurumi-hada.jpeg",
+    descripcion: "Amigurumi tejido a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "amigurumi-snoopy-coleccion",
+    nombre: "Amigurumi Colección Snoopy",
+    categoria: "amigurumis",
+    precio: 0,
+    imagen: "amigurumis/amigurumi-snoppy-coleccion.jpeg",
+    descripcion: "Amigurumi tejido a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
+  {
+    id: "amigurumi-vaca-escocesa-cuy-alf",
+    nombre: "Amigurumi Vaca Escocesa, Cuy y Alf",
+    categoria: "amigurumis",
+    precio: 0,
+    imagen: "amigurumis/amigurumi-vaca-escocesa-cuy-alf.jpeg",
+    descripcion: "Amigurumi tejido a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
   },
 ];
 
@@ -156,12 +305,15 @@ const PRODUCTOS = [
    OJO: los dos de abajo son EJEMPLOS. Cámbialos por los reales
    (nombre, precio, presentación) o bórralos.
 
+   Las fotos de turrones van en la carpeta "fotos/comida/".
+   Ejemplo: imagen: "comida/turron-doña-pepa.jpeg"
+
    Campos:
      id           -> texto único, sin espacios
      nombre       -> nombre del turrón
      precio       -> solo el número, sin "S/"
      presentacion -> cómo se vende (ej: "Caja", "Porción", "Bandeja")
-     imagen       -> archivo dentro de "fotos/"
+     imagen       -> "comida/" + nombre del archivo
      descripcion  -> texto corto
      disponible   -> true / false (false lo muestra como "Agotado")
    ------------------------------------------------------------ */
