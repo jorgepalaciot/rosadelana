@@ -1146,3 +1146,9 @@ body {
 .modal-ficha[hidden] { display: none; }
 .modal-ficha li { font-size: 0.92rem; color: var(--cafe-suave); border-top: 1px solid var(--linea-suave); padding-top: 8px; }
 .modal-ficha strong { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #B07A4A; }
+
+
+/* --- Fotos completas: sin recortar (object-fit: contain) --- */
+.tarjeta-imagen img,
+.modal-imagen-principal img,
+.modal-miniatura img { object-fit: contain; background: var(--lana-crema-alt); }

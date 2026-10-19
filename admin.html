@@ -23,11 +23,23 @@
   /* Previsualización de fotos */
   #previas{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
   .prev{position:relative;width:84px;height:84px}
-  .prev img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+  .prev img{width:100%;height:100%;object-fit:contain;background:#ECE0CC;border-radius:8px}
   #previas button{position:absolute;margin:0;width:24px;height:24px;padding:0;border-radius:50%;font-family:system-ui,sans-serif;font-weight:700;font-size:.75rem;letter-spacing:0;line-height:24px;background:rgba(43,29,27,.8)}
   #previas .x{top:-6px;right:-6px}
   #previas .star{bottom:-6px;right:-6px;background:var(--tostado)}
   .prev .tag{position:absolute;left:4px;bottom:4px;background:var(--rosa);color:#fff;font-size:.65rem;font-weight:700;padding:2px 6px;border-radius:4px}
+
+  /* Vista previa tal como se verá en el catálogo */
+  #vista{display:none;margin-top:18px}
+  #vista.on{display:block}
+  .vista-t{font-weight:700;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+  .vista-card{width:200px;background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 6px 18px -8px rgba(43,29,27,.35);padding-bottom:12px}
+  .vista-img{position:relative;aspect-ratio:1/1;background:#ECE0CC}
+  .vista-img img{width:100%;height:100%;object-fit:contain;display:block}
+  .vista-cinta{position:absolute;top:10px;left:10px;background:var(--blanco);font-size:.6rem;font-weight:800;padding:4px 9px;letter-spacing:.1em;text-transform:uppercase}
+  .vista-card p{margin:8px 14px 0;font-size:.85rem}
+  .vista-card .cat{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);margin-top:10px}
+  .vista-card .pr{font-weight:700;color:var(--rosa)}
 
   button{margin-top:22px;width:100%;padding:14px;border:0;border-radius:4px;background:var(--rosa);color:#fff;font-family:inherit;font-weight:800;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
   button:disabled{opacity:.5}
@@ -67,7 +79,17 @@
     <small>Puedes agregar varias, de una en una o juntas. Toca ★ para hacer principal una foto.</small>
     <div id="previas"></div>
 
-    <label class="check"><input type="checkbox" id="destacado"> Destacado</label>
+    <div id="vista">
+      <div class="vista-t">Así se verá en el catálogo</div>
+      <div class="vista-card">
+        <div class="vista-img"><span class="vista-cinta" id="vCinta" hidden>Destacado</span><img id="vImg" alt=""></div>
+        <p class="cat" id="vCat"></p>
+        <p id="vNom"></p>
+        <p class="pr" id="vPre"></p>
+      </div>
+    </div>
+
+    <label class="check"><input type="checkbox" id="destacado"> Destacado (aparece primero en el catálogo)</label>
     <label class="check"><input type="checkbox" id="disponible" checked> Disponible</label>
 
     <button id="enviar" type="submit">Publicar producto</button>
@@ -145,7 +167,24 @@ function pintarPrevias() {
 
     cont.appendChild(d);
   });
+  pintarVista();
 }
+
+function pintarVista() {
+  const v = $("vista");
+  v.classList.toggle("on", fotos.length > 0);
+  if (!fotos.length) return;
+  if (v.dataset.f !== String(fotos[0].lastModified) + fotos[0].name + fotos[0].size) {
+    $("vImg").src = URL.createObjectURL(fotos[0]);
+    v.dataset.f = String(fotos[0].lastModified) + fotos[0].name + fotos[0].size;
+  }
+  $("vCat").textContent = $("categoria").selectedOptions[0].text;
+  $("vNom").textContent = $("nombre").value.trim() || "Nombre del producto";
+  const p = Number($("precio").value) || 0;
+  $("vPre").textContent = "S/ " + p.toFixed(2).replace(/\.00$/, "");
+  $("vCinta").hidden = !$("destacado").checked;
+}
+["nombre", "categoria", "precio", "destacado"].forEach((id) => $(id).addEventListener("input", pintarVista));
 
 $("fotos").addEventListener("change", () => {
   fotos.push(...$("fotos").files);
@@ -199,7 +238,7 @@ $("form").addEventListener("submit", async (e) => {
     if (!fin.ok) throw new Error("No pude guardar productos.js (" + fin.status + "). Si alguien más editó el archivo, vuelve a intentar.");
 
     log("✓ Listo. En 1–2 minutos aparece en la web.", "ok");
-    $("form").reset(); fotos = []; pintarPrevias(); $("disponible").checked = true;
+    $("form").reset(); fotos = []; $("vista").dataset.f = ""; pintarPrevias(); $("disponible").checked = true;
   } catch (err) {
     log(err.message, "error");
   }

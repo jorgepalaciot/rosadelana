@@ -90,11 +90,17 @@
 
   /* ---------- Tarjetas de producto ---------- */
   function productosFiltrados() {
-    return PRODUCTOS.filter((p) => {
+    const lista = PRODUCTOS.filter((p) => {
       const coincideCategoria = categoriaActiva === "todas" || p.categoria === categoriaActiva;
       const coincideBusqueda = p.nombre.toLowerCase().includes(textoBusqueda.toLowerCase());
       return coincideCategoria && coincideBusqueda;
     });
+    // Destacados (y disponibles) primero; el resto mantiene su orden original
+    const puntaje = (p) => (p.destacado && p.disponible !== false ? 0 : 1);
+    return lista
+      .map((p, i) => ({ p, i }))
+      .sort((a, b) => puntaje(a.p) - puntaje(b.p) || a.i - b.i)
+      .map((x) => x.p);
   }
 
   function nombreCategoria(id) {
