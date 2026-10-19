@@ -33,9 +33,13 @@
   #vista{display:none;margin-top:18px}
   #vista.on{display:block}
   .vista-t{font-weight:700;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+  .vista-fila{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+  .vista-sub{font-size:.7rem;color:var(--suave);margin:0 0 6px}
   .vista-card{width:200px;background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 6px 18px -8px rgba(43,29,27,.35);padding-bottom:12px}
   .vista-img{position:relative;aspect-ratio:1/1;background:#ECE0CC}
-  .vista-img img{width:100%;height:100%;object-fit:contain;display:block}
+  .vista-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .vista-det{width:200px;aspect-ratio:1/1;background:#ECE0CC;border-radius:6px;overflow:hidden}
+  .vista-det img{width:100%;height:100%;object-fit:contain;display:block}
   .vista-cinta{position:absolute;top:10px;left:10px;background:var(--blanco);font-size:.6rem;font-weight:800;padding:4px 9px;letter-spacing:.1em;text-transform:uppercase}
   .vista-card p{margin:8px 14px 0;font-size:.85rem}
   .vista-card .cat{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);margin-top:10px}
@@ -80,12 +84,22 @@
     <div id="previas"></div>
 
     <div id="vista">
-      <div class="vista-t">Así se verá en el catálogo</div>
-      <div class="vista-card">
-        <div class="vista-img"><span class="vista-cinta" id="vCinta" hidden>Destacado</span><img id="vImg" alt=""></div>
-        <p class="cat" id="vCat"></p>
-        <p id="vNom"></p>
-        <p class="pr" id="vPre"></p>
+      <div class="vista-fila">
+        <div>
+          <div class="vista-t">En el catálogo</div>
+          <p class="vista-sub">La cuadrícula recorta para verse pareja.</p>
+          <div class="vista-card">
+            <div class="vista-img"><span class="vista-cinta" id="vCinta" hidden>Destacado</span><img id="vImg" alt=""></div>
+            <p class="cat" id="vCat"></p>
+            <p id="vNom"></p>
+            <p class="pr" id="vPre"></p>
+          </div>
+        </div>
+        <div>
+          <div class="vista-t">Al hacer clic</div>
+          <p class="vista-sub">Aquí la foto se ve completa.</p>
+          <div class="vista-det"><img id="vImg2" alt=""></div>
+        </div>
       </div>
     </div>
 
@@ -175,7 +189,7 @@ function pintarVista() {
   v.classList.toggle("on", fotos.length > 0);
   if (!fotos.length) return;
   if (v.dataset.f !== String(fotos[0].lastModified) + fotos[0].name + fotos[0].size) {
-    $("vImg").src = URL.createObjectURL(fotos[0]);
+    $("vImg").src = $("vImg2").src = URL.createObjectURL(fotos[0]);
     v.dataset.f = String(fotos[0].lastModified) + fotos[0].name + fotos[0].size;
   }
   $("vCat").textContent = $("categoria").selectedOptions[0].text;
