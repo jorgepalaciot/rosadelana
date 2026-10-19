@@ -308,6 +308,18 @@ const PRODUCTOS = [
     destacado: true,
     disponible: true,
   },
+  {
+    id: "amigurumi-hello-kitty",
+    nombre: "Amigurumi Hello Kitty",
+    categoria: "amigurumis",
+    precio: 150,
+    imagen: "amigurumis/amigurumi-hello-kitty.jpeg",
+    descripcion: "colección Hello Kitty + My Melody. Amigurumis hecho a mano en Perú por Rosa Miriam Tello",
+    medidas: "12cm de alto",
+    materiales: "algodón",
+    destacado: true,
+    disponible: true,
+  },
 ];
 
 
