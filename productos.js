@@ -323,7 +323,7 @@ const TURRONES = [
     nombre: "Turrón de 400 gr",
     precio: 27,
     presentacion: "Porción en caja",
-    imagen: "turron.jpg",
+    imagen: "comidas/turron.jpg",
     descripcion: "Cambia este texto por la descripción real de tu turrón.",
     disponible: true,
   },
