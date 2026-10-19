@@ -201,6 +201,13 @@
     document.getElementById("modalPrecio").textContent = formatearPrecio(producto.precio);
     document.getElementById("modalDescripcion").textContent = producto.descripcion || "";
 
+    const ficha = document.getElementById("modalFicha");
+    const filas = [];
+    if (producto.medidas) filas.push(`<li><strong>Medidas</strong> ${producto.medidas}</li>`);
+    if (producto.materiales) filas.push(`<li><strong>Materiales</strong> ${producto.materiales}</li>`);
+    ficha.innerHTML = filas.join("");
+    ficha.hidden = filas.length === 0;
+
     const btnWhatsapp = document.getElementById("modalWhatsapp");
     const disponible = producto.disponible !== false;
     if (disponible) {

@@ -1139,3 +1139,10 @@ body {
 .lista-valores li strong { color: #B07A4A; }
 .paso-numero { color: var(--rosa-oscuro); }
 .barra-seleccion { border-radius: 14px 14px 0 0; }
+
+
+/* --- Ficha técnica en el detalle: medidas y materiales --- */
+.modal-ficha { margin: 0 0 22px; display: flex; flex-direction: column; gap: 8px; }
+.modal-ficha[hidden] { display: none; }
+.modal-ficha li { font-size: 0.92rem; color: var(--cafe-suave); border-top: 1px solid var(--linea-suave); padding-top: 8px; }
+.modal-ficha strong { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #B07A4A; }
