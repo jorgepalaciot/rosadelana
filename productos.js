@@ -306,7 +306,7 @@ const PRODUCTOS = [
    (nombre, precio, presentación) o bórralos.
 
    Las fotos de turrones van en la carpeta "fotos/comida/".
-   Ejemplo: imagen: "comida/turron-doña-pepa.jpeg"
+   Ejemplo: imagen: "comidas/turron.jpeg"
 
    Campos:
      id           -> texto único, sin espacios
@@ -320,10 +320,10 @@ const PRODUCTOS = [
 const TURRONES = [
   {
     id: "turron-ejemplo-01",
-    nombre: "Turrón de ejemplo 1",
-    precio: 25,
-    presentacion: "Porción",
-    imagen: "placeholder.jpg",
+    nombre: "Turrón de 400 gr",
+    precio: 27,
+    presentacion: "Porción en caja",
+    imagen: "turron.jpg",
     descripcion: "Cambia este texto por la descripción real de tu turrón.",
     disponible: true,
   },
