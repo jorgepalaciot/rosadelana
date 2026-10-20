@@ -335,6 +335,16 @@ const PRODUCTOS = [
     destacado: true,
     disponible: true,
   },
+  {
+    id: "angelica",
+    nombre: "Angelica",
+    categoria: "amigurumis",
+    precio: 180,
+    imagen: "amigurumis/angelica-mvgc5zex0.jpeg",
+    descripcion: "Tejido a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
 ];
 
 
