@@ -367,6 +367,7 @@ const PRODUCTOS = [
     imagen: "ranitas/rana-vestido-rosado-mvh8kgp80.jpeg",
     descripcion: "Tejido a mano. Pieza única.",
     medidas: "10 cm",
+    edicion: "\"\"",
     destacado: false,
     disponible: true,
   },
