@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>Agregar producto — Rosa de Lana</title>
+<title>Productos — Rosa de Lana</title>
 <style>
   :root{--rosa:#8C3A52;--crema:#F4EBDC;--cafe:#2B1D1B;--suave:#5C4A42;--blanco:#FFFCF7;--tostado:#C98A3F}
   *{box-sizing:border-box}
@@ -13,15 +13,15 @@
   main{max-width:560px;margin:0 auto;padding:28px 18px 60px}
   h1{font-family:Georgia,serif;font-weight:600;color:var(--rosa);margin:0 0 4px}
   p.sub{color:var(--suave);margin:0 0 22px}
-  form{background:var(--blanco);padding:22px;border-radius:14px;box-shadow:0 10px 30px -12px rgba(43,29,27,.28)}
+  form,.card{background:var(--blanco);padding:22px;border-radius:14px;box-shadow:0 10px 30px -12px rgba(43,29,27,.28)}
+  .card{margin-bottom:16px}
   label{display:block;font-weight:700;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;margin:16px 0 6px}
+  .card label:first-child{margin-top:0}
   input,select,textarea{width:100%;padding:11px 13px;border:2px solid rgba(43,29,27,.15);border-radius:10px;font:inherit;background:#fff}
   input:focus,select:focus,textarea:focus{outline:none;border-color:var(--rosa)}
   .fila{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .check{display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-size:.95rem;margin:14px 0 0}
   .check input{width:auto}
-
-  /* Previsualización de fotos */
   #previas{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
   .prev{position:relative;width:84px;height:84px}
   .prev img{width:100%;height:100%;object-fit:contain;background:#ECE0CC;border-radius:8px}
@@ -29,8 +29,6 @@
   #previas .x{top:-6px;right:-6px}
   #previas .star{bottom:-6px;right:-6px;background:var(--tostado)}
   .prev .tag{position:absolute;left:4px;bottom:4px;background:var(--rosa);color:#fff;font-size:.65rem;font-weight:700;padding:2px 6px;border-radius:4px}
-
-  /* Vista previa tal como se verá en el catálogo */
   #vista{display:none;margin-top:18px}
   #vista.on{display:block}
   .vista-t{font-weight:700;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
@@ -45,9 +43,9 @@
   .vista-card p{margin:8px 14px 0;font-size:.85rem}
   .vista-card .cat{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);margin-top:10px}
   .vista-card .pr{font-weight:700;color:var(--rosa)}
-
   button{margin-top:22px;width:100%;padding:14px;border:0;border-radius:4px;background:var(--rosa);color:#fff;font-family:inherit;font-weight:800;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
   button:disabled{opacity:.5}
+  #eliminar{background:transparent;color:#b3261e;border:1px solid #b3261e;margin-top:10px}
   #estado{margin-top:16px;font-weight:700}
   #estado.ok{color:#2e7d32}#estado.error{color:#b3261e}
   details{margin-top:22px;color:var(--suave);font-size:.9rem}
@@ -56,47 +54,53 @@
 </head>
 <body>
 <main>
-  <h1>Agregar producto</h1>
-  <p class="sub">Llena los datos y se publica en la web en 1–2 minutos.</p>
+  <h1>Productos</h1>
+  <p class="sub">Agrega o cambia productos. Se publica en la web en 1–2 minutos.</p>
+
+  <div class="card">
+    <label for="modo">¿Qué quieres hacer?</label>
+    <select id="modo"><option value="agregar">Agregar un producto nuevo</option><option value="editar">Cambiar o eliminar uno existente</option></select>
+    <div id="bloqueElegir" hidden>
+      <label for="elegir">Producto</label>
+      <select id="elegir"></select>
+    </div>
+  </div>
 
   <form id="form">
-    <label for="tipo">¿Qué vas a publicar?</label>
+    <label for="tipo">Tipo</label>
     <select id="tipo"><option value="tejido">Tejido</option><option value="comida">Comida</option></select>
 
     <label for="nombre">Nombre</label>
     <input id="nombre" required placeholder="Ej. Cartera Lila con asa larga">
 
     <div class="fila">
-      <div><label for="categoria">Categoría</label>
-        <select id="categoria"><option value="carteras">Carteras</option><option value="amigurumis">Amigurumis</option><option value="accesorios">Accesorios</option><option value="otros">Otros</option></select></div>
-      <div><label for="precio">Precio (S/)</label>
-        <input id="precio" type="number" min="0" step="0.5" required></div>
+      <div><label for="categoria">Categoría</label><select id="categoria"></select></div>
+      <div><label for="precio">Precio (S/)</label><input id="precio" type="number" min="0" step="0.5" required></div>
     </div>
 
     <div class="solo-tejido">
-    <label for="medidas">Medidas</label>
-    <input id="medidas" placeholder="Ej. 25 x 18 x 8 cm">
-
-    <label for="materiales">Materiales</label>
-    <input id="materiales" placeholder="Ej. Lana 100% algodón, forro de tela">
+      <label for="medidas">Medidas</label>
+      <input id="medidas" placeholder="Ej. 25 x 18 x 8 cm">
+      <label for="materiales">Materiales</label>
+      <input id="materiales" placeholder="Ej. Lana 100% algodón, forro de tela">
     </div>
     <div class="solo-comida" hidden>
-    <label for="presentacion">Presentación</label>
-    <input id="presentacion" placeholder="Ej. Pastel entero">
-    <label for="porciones">Porciones</label>
-    <input id="porciones" placeholder="Ej. 8 porciones">
-    <label for="anticipacion">Anticipación</label>
-    <input id="anticipacion" placeholder="Ej. Pedir con 2 días de anticipación">
-    <label for="ingredientes">Ingredientes</label>
-    <input id="ingredientes" placeholder="Ej. Acelgas, queso, huevo">
+      <label for="presentacion">Presentación</label>
+      <input id="presentacion" placeholder="Ej. Pastel entero">
+      <label for="porciones">Porciones</label>
+      <input id="porciones" placeholder="Ej. 8 porciones">
+      <label for="anticipacion">Anticipación</label>
+      <input id="anticipacion" placeholder="Ej. Pedir con 2 días de anticipación">
+      <label for="ingredientes">Ingredientes</label>
+      <input id="ingredientes" placeholder="Ej. Acelgas, queso, huevo">
     </div>
 
     <label for="descripcion">Descripción</label>
-    <textarea id="descripcion" rows="3" placeholder="Texto corto sobre la pieza"></textarea>
+    <textarea id="descripcion" rows="3" placeholder="Texto corto sobre el producto"></textarea>
 
-    <label for="fotos">Fotos (frente, costado, detalle…)</label>
+    <label for="fotos">Fotos</label>
     <input id="fotos" type="file" accept="image/*" multiple>
-    <small>Puedes agregar varias, de una en una o juntas. Toca ★ para hacer principal una foto.</small>
+    <small>Agrega varias, de una en una o juntas. ★ hace principal una foto y ✕ la quita del producto. En comidas solo se usa la principal.</small>
     <div id="previas"></div>
 
     <div id="vista">
@@ -106,9 +110,7 @@
           <p class="vista-sub">La cuadrícula recorta para verse pareja.</p>
           <div class="vista-card">
             <div class="vista-img"><span class="vista-cinta" id="vCinta" hidden>Destacado</span><img id="vImg" alt=""></div>
-            <p class="cat" id="vCat"></p>
-            <p id="vNom"></p>
-            <p class="pr" id="vPre"></p>
+            <p class="cat" id="vCat"></p><p id="vNom"></p><p class="pr" id="vPre"></p>
           </div>
         </div>
         <div>
@@ -120,9 +122,10 @@
     </div>
 
     <label class="check solo-tejido"><input type="checkbox" id="destacado"> Destacado (aparece primero en el catálogo)</label>
-    <label class="check"><input type="checkbox" id="disponible" checked> Disponible</label>
+    <label class="check"><input type="checkbox" id="disponible" checked> Disponible (desmárcalo si ya se vendió)</label>
 
     <button id="enviar" type="submit">Publicar producto</button>
+    <button id="eliminar" type="button" hidden>Eliminar este producto</button>
     <div id="estado" role="status"></div>
   </form>
 
@@ -137,10 +140,10 @@
 <script>
 const REPO = "jorgepalaciot/rosadelana", RAMA = "main";
 const $ = (id) => document.getElementById(id);
+const log = (m, c = "") => { $("estado").textContent = m; $("estado").className = c; };
 $("token").value = localStorage.getItem("rdl_token") || "";
 if (!$("token").value) document.querySelector("details").open = true;
 
-// Llamada a la API de GitHub. Si el navegador no logra conectar, el mensaje dice qué paso falló.
 const api = async (ruta, op = {}) => {
   try {
     return await fetch(`https://api.github.com/repos/${REPO}/contents/${ruta}`, {
@@ -166,63 +169,34 @@ async function reducir(archivo) {
   return await new Promise((r) => { const f = new FileReader(); f.onload = () => r(f.result.split(",")[1]); f.readAsDataURL(blob); });
 }
 
-/* ---------- Fotos: agregar de a una, quitar, elegir principal ---------- */
-let fotos = [];
-
-function pintarPrevias() {
-  const cont = $("previas");
-  cont.innerHTML = "";
-  fotos.forEach((f, i) => {
-    const d = document.createElement("div");
-    d.className = "prev";
-    const im = new Image();
-    im.src = URL.createObjectURL(f);
-    d.appendChild(im);
-
-    if (i === 0) {
-      const t = document.createElement("span");
-      t.className = "tag"; t.textContent = "Principal";
-      d.appendChild(t);
-    } else {
-      const s = document.createElement("button");
-      s.type = "button"; s.className = "star"; s.textContent = "★"; s.title = "Hacer principal";
-      s.onclick = () => { fotos.unshift(fotos.splice(i, 1)[0]); pintarPrevias(); };
-      d.appendChild(s);
-    }
-
-    const x = document.createElement("button");
-    x.type = "button"; x.className = "x"; x.textContent = "✕"; x.title = "Quitar";
-    x.onclick = () => { fotos.splice(i, 1); pintarPrevias(); };
-    d.appendChild(x);
-
-    cont.appendChild(d);
-  });
-  pintarVista();
+/* ---------- productos.js: leer, escribir, ubicar un bloque ---------- */
+async function leer() {
+  if (!$("token").value.trim()) { document.querySelector("details").open = true; throw new Error("Falta el token de GitHub."); }
+  const r = await api("productos.js?ref=" + RAMA);
+  if (!r.ok) throw new Error("No pude leer productos.js (" + r.status + "). Revisa el token.");
+  const j = await r.json();
+  return { j, txt: dec(j.content) };
+}
+async function escribir(txt, j, msg) {
+  const f = await api("productos.js", { method: "PUT", body: JSON.stringify({ message: msg, content: enc(txt), sha: j.sha, branch: RAMA }) });
+  if (!f.ok) throw new Error("No pude guardar productos.js (" + f.status + "). Si alguien más editó el archivo, vuelve a intentar.");
+}
+function bloque(txt, id) {
+  const k = txt.indexOf(`id: "${id}"`);
+  if (k < 0) return null;
+  const a = txt.lastIndexOf("  {\n", k), b = txt.indexOf("\n  },\n", k);
+  return a < 0 || b < 0 ? null : [a, b + 6];
+}
+function armarBloque(id, tipo, cat, nombre, rutas) {
+  const v = (k) => $(k).value.trim(), com = tipo === "comida";
+  let b = `  {\n    id: ${q(id)},\n    nombre: ${q(nombre)},\n    categoria: ${q(cat)},\n    precio: ${Number($("precio").value) || 0},\n    imagen: ${q(rutas[0])},\n`;
+  if (!com && rutas.length > 1) b += `    imagenes: ${JSON.stringify(rutas)},\n`;
+  b += `    descripcion: ${q(v("descripcion") || (com ? "Preparado por encargo." : "Tejido a mano. Pieza única."))},\n`;
+  for (const k of com ? ["presentacion", "porciones", "anticipacion", "ingredientes"] : ["medidas", "materiales"]) if (v(k)) b += `    ${k}: ${q(v(k))},\n`;
+  return b + (com ? "" : `    destacado: ${$("destacado").checked},\n`) + `    disponible: ${$("disponible").checked},\n  },\n`;
 }
 
-function pintarVista() {
-  const v = $("vista");
-  v.classList.toggle("on", fotos.length > 0);
-  if (!fotos.length) return;
-  if (v.dataset.f !== String(fotos[0].lastModified) + fotos[0].name + fotos[0].size) {
-    $("vImg").src = $("vImg2").src = URL.createObjectURL(fotos[0]);
-    v.dataset.f = String(fotos[0].lastModified) + fotos[0].name + fotos[0].size;
-  }
-  $("vCat").textContent = $("categoria").selectedOptions[0].text;
-  $("vNom").textContent = $("nombre").value.trim() || "Nombre del producto";
-  const p = Number($("precio").value) || 0;
-  $("vPre").textContent = "S/ " + p.toFixed(2).replace(/\.00$/, "");
-  $("vCinta").hidden = !$("destacado").checked;
-}
-["nombre", "categoria", "precio", "destacado"].forEach((id) => $(id).addEventListener("input", pintarVista));
-
-$("fotos").addEventListener("change", () => {
-  fotos.push(...$("fotos").files);
-  $("fotos").value = "";   // permite volver a elegir la misma foto
-  pintarPrevias();
-});
-
-/* ---------- Tipo: tejido o comida ---------- */
+/* ---------- Tipo y categorías ---------- */
 const CATS = {
   tejido: [["carteras", "Carteras"], ["amigurumis", "Amigurumis"], ["accesorios", "Accesorios"], ["otros", "Otros"]],
   comida: [["pasteles", "Pasteles salados"], ["turrones", "Turrones"]],
@@ -236,59 +210,150 @@ function cambiarTipo() {
 }
 $("tipo").addEventListener("change", cambiarTipo);
 
-/* ---------- Publicar ---------- */
+/* ---------- Fotos: {url, file} nuevas o {url, ruta} ya publicadas ---------- */
+let fotos = [], datosRepo = null, editId = null;
+
+function pintarPrevias() {
+  const cont = $("previas");
+  cont.innerHTML = "";
+  fotos.forEach((f, i) => {
+    const d = document.createElement("div");
+    d.className = "prev";
+    const im = new Image(); im.src = f.url; d.appendChild(im);
+    if (i === 0) {
+      const t = document.createElement("span"); t.className = "tag"; t.textContent = "Principal"; d.appendChild(t);
+    } else {
+      const s = document.createElement("button");
+      s.type = "button"; s.className = "star"; s.textContent = "★"; s.title = "Hacer principal";
+      s.onclick = () => { fotos.unshift(fotos.splice(i, 1)[0]); pintarPrevias(); };
+      d.appendChild(s);
+    }
+    const x = document.createElement("button");
+    x.type = "button"; x.className = "x"; x.textContent = "✕"; x.title = "Quitar";
+    x.onclick = () => { fotos.splice(i, 1); pintarPrevias(); };
+    d.appendChild(x);
+    cont.appendChild(d);
+  });
+  pintarVista();
+}
+function pintarVista() {
+  $("vista").classList.toggle("on", fotos.length > 0);
+  if (!fotos.length) return;
+  $("vImg").src = $("vImg2").src = fotos[0].url;
+  $("vCat").textContent = $("categoria").selectedOptions[0] ? $("categoria").selectedOptions[0].text : "";
+  $("vNom").textContent = $("nombre").value.trim() || "Nombre del producto";
+  const p = Number($("precio").value) || 0;
+  $("vPre").textContent = "S/ " + p.toFixed(2).replace(/\.00$/, "");
+  $("vCinta").hidden = !$("destacado").checked || $("tipo").value === "comida";
+}
+["nombre", "categoria", "precio", "destacado"].forEach((id) => $(id).addEventListener("input", pintarVista));
+$("fotos").addEventListener("change", () => {
+  fotos.push(...[...$("fotos").files].map((f) => ({ url: URL.createObjectURL(f), file: f })));
+  $("fotos").value = "";
+  pintarPrevias();
+});
+
+/* ---------- Modo: agregar o editar ---------- */
+const modoEditar = () => $("modo").value === "editar";
+function limpiar() {
+  $("form").reset(); fotos = []; editId = null;
+  $("elegir").value = ""; $("eliminar").hidden = true;
+  cambiarTipo(); pintarPrevias();
+}
+async function cargarLista() {
+  try {
+    log("Cargando productos…");
+    const { txt } = await leer();
+    datosRepo = new Function(txt + "\nreturn {PRODUCTOS, COMIDAS};")();
+    const op = (g, l, t) => `<optgroup label="${g}">` + l.map((p) => `<option value="${t}:${p.id}">${p.nombre}</option>`).join("") + "</optgroup>";
+    $("elegir").innerHTML = '<option value="">Elige un producto…</option>' + op("Tejidos", datosRepo.PRODUCTOS, "tejido") + op("Comidas", datosRepo.COMIDAS, "comida");
+    log("");
+  } catch (e) { log(e.message, "error"); }
+}
+$("modo").addEventListener("change", async () => {
+  const ed = modoEditar();
+  limpiar();
+  $("bloqueElegir").hidden = !ed; $("tipo").disabled = ed;
+  $("enviar").textContent = ed ? "Guardar cambios" : "Publicar producto";
+  if (ed) await cargarLista(); else log("");
+});
+$("elegir").addEventListener("change", () => {
+  const [t, id] = $("elegir").value.split(":");
+  const sel = $("elegir").value;
+  limpiar(); $("elegir").value = sel;
+  if (!id) return;
+  const p = (t === "comida" ? datosRepo.COMIDAS : datosRepo.PRODUCTOS).find((x) => x.id === id);
+  $("tipo").value = t; cambiarTipo(); editId = id;
+  $("categoria").value = p.categoria; $("nombre").value = p.nombre; $("precio").value = p.precio;
+  for (const k of ["medidas", "materiales", "presentacion", "porciones", "anticipacion", "ingredientes", "descripcion"]) $(k).value = p[k] || "";
+  $("destacado").checked = !!p.destacado; $("disponible").checked = p.disponible !== false;
+  fotos = (p.imagenes && p.imagenes.length ? p.imagenes : [p.imagen]).map((r) => ({ url: "fotos/" + r, ruta: r }));
+  $("eliminar").hidden = false; pintarPrevias();
+});
+
+/* ---------- Guardar (nuevo o cambios) ---------- */
 $("form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const estado = $("estado"), log = (m, c = "") => { estado.textContent = m; estado.className = c; };
-  $("enviar").disabled = true;
+  $("enviar").disabled = $("eliminar").disabled = true;
   try {
-    const tk = $("token").value.trim();
-    if (!tk) { document.querySelector("details").open = true; throw new Error("Falta el token de GitHub."); }
-    if (fotos.length === 0) throw new Error("Agrega al menos una foto.");
-    localStorage.setItem("rdl_token", tk);
-
+    if (!fotos.length) throw new Error("Agrega al menos una foto.");
+    const edit = editId !== null, tipo = $("tipo").value, cat = $("categoria").value, nombre = $("nombre").value.trim();
     log("Leyendo el catálogo…");
-    const r = await api("productos.js?ref=" + RAMA);
-    if (!r.ok) throw new Error("No pude leer productos.js (" + r.status + "). Revisa el token.");
-    const j = await r.json();
-    let txt = dec(j.content);
+    const { j, txt: t0 } = await leer();
+    let txt = t0;
+    localStorage.setItem("rdl_token", $("token").value.trim());
 
-    const nombre = $("nombre").value.trim(), cat = $("categoria").value, base = slug(nombre);
-    let id = base, n = 2;
-    while (txt.includes(`id: "${id}"`)) id = base + "-" + n++;
+    let id = editId;
+    if (!edit) { const base = slug(nombre); id = base; let n = 2; while (txt.includes(`id: "${id}"`)) id = base + "-" + n++; }
 
-    const tipo = $("tipo").value, files = tipo === "comida" ? fotos.slice(0, 1) : fotos, rutas = [];
-    for (let i = 0; i < files.length; i++) {
-      log(`Subiendo foto ${i + 1} de ${files.length}…`);
-      const ruta = `${tipo === "comida" ? "comidas" : cat}/${id}${files.length > 1 ? "-" + (i + 1) : ""}.jpeg`;
-      const put = await api("fotos/" + ruta, { method: "PUT", body: JSON.stringify({ message: "Foto: " + id, content: await reducir(files[i]), branch: RAMA }) });
+    const lista = tipo === "comida" ? fotos.slice(0, 1) : fotos, rutas = [], suf = Date.now().toString(36);
+    for (let i = 0; i < lista.length; i++) {
+      if (lista[i].ruta) { rutas.push(lista[i].ruta); continue; }
+      log(`Subiendo foto ${i + 1} de ${lista.length}…`);
+      const ruta = `${tipo === "comida" ? "comidas" : cat}/${id}-${suf}${i}.jpeg`;
+      const put = await api("fotos/" + ruta, { method: "PUT", body: JSON.stringify({ message: "Foto: " + id, content: await reducir(lista[i].file), branch: RAMA }) });
       if (!put.ok) throw new Error("No pude subir la foto " + (i + 1) + " (" + put.status + ").");
       rutas.push(ruta);
     }
 
-    let b = `  {\n    id: ${q(id)},\n    nombre: ${q(nombre)},\n    categoria: ${q(cat)},\n    precio: ${Number($("precio").value) || 0},\n    imagen: ${q(rutas[0])},\n`;
-    if (tipo === "tejido" && rutas.length > 1) b += `    imagenes: ${JSON.stringify(rutas)},\n`;
-    b += `    descripcion: ${q($("descripcion").value.trim() || (tipo === "comida" ? "Preparado por encargo." : "Tejido a mano. Pieza única."))},\n`;
-    if (tipo === "tejido" && $("medidas").value.trim()) b += `    medidas: ${q($("medidas").value.trim())},\n`;
-    if (tipo === "tejido" && $("materiales").value.trim()) b += `    materiales: ${q($("materiales").value.trim())},\n`;
-    if (tipo === "comida") for (const k of ["presentacion", "porciones", "anticipacion", "ingredientes"]) if ($(k).value.trim()) b += `    ${k}: ${q($(k).value.trim())},\n`;
-    b += (tipo === "tejido" ? `    destacado: ${$("destacado").checked},\n` : "") + `    disponible: ${$("disponible").checked},\n  },\n`;
-
-    const pos = tipo === "comida" ? txt.lastIndexOf("];") : txt.lastIndexOf("];", txt.indexOf("const CATEGORIAS_COMIDAS"));
-    if (pos < 0) throw new Error("No encontré dónde insertar el producto en productos.js.");
-    txt = txt.slice(0, pos) + b + txt.slice(pos);
-
+    const b = armarBloque(id, tipo, cat, nombre, rutas);
+    if (edit) {
+      const s = bloque(txt, id);
+      if (!s) throw new Error("No encontré ese producto en productos.js. Vuelve a cargar la lista.");
+      txt = txt.slice(0, s[0]) + b + txt.slice(s[1]);
+    } else {
+      const pos = tipo === "comida" ? txt.lastIndexOf("];") : txt.lastIndexOf("];", txt.indexOf("const CATEGORIAS_COMIDAS"));
+      if (pos < 0) throw new Error("No encontré dónde insertar el producto en productos.js.");
+      txt = txt.slice(0, pos) + b + txt.slice(pos);
+    }
     log("Publicando…");
-    const fin = await api("productos.js", { method: "PUT", body: JSON.stringify({ message: "Nuevo producto: " + nombre, content: enc(txt), sha: j.sha, branch: RAMA }) });
-    if (!fin.ok) throw new Error("No pude guardar productos.js (" + fin.status + "). Si alguien más editó el archivo, vuelve a intentar.");
+    await escribir(txt, j, (edit ? "Cambios en: " : "Nuevo producto: ") + nombre);
 
+    limpiar();
+    if (edit) await cargarLista();
     log("✓ Listo. En 1–2 minutos aparece en la web.", "ok");
-    $("form").reset(); fotos = []; $("vista").dataset.f = ""; pintarPrevias(); $("disponible").checked = true; cambiarTipo();
-  } catch (err) {
-    log(err.message, "error");
-  }
-  $("enviar").disabled = false;
+  } catch (err) { log(err.message, "error"); }
+  $("enviar").disabled = $("eliminar").disabled = false;
 });
+
+/* ---------- Eliminar ---------- */
+$("eliminar").addEventListener("click", async () => {
+  if (!editId || !confirm("¿Eliminar este producto de la web? Las fotos quedan guardadas en GitHub.")) return;
+  $("enviar").disabled = $("eliminar").disabled = true;
+  try {
+    log("Leyendo el catálogo…");
+    const { j, txt } = await leer();
+    const s = bloque(txt, editId);
+    if (!s) throw new Error("No encontré ese producto en productos.js.");
+    log("Eliminando…");
+    await escribir(txt.slice(0, s[0]) + txt.slice(s[1]), j, "Eliminar producto: " + editId);
+    limpiar(); await cargarLista();
+    log("✓ Eliminado. En 1–2 minutos desaparece de la web.", "ok");
+  } catch (err) { log(err.message, "error"); }
+  $("enviar").disabled = $("eliminar").disabled = false;
+});
+
+cambiarTipo();
 </script>
 </body>
 </html>
