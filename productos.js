@@ -95,7 +95,7 @@ const CATEGORIAS = [
    CARPETAS dentro de "fotos/":
      fotos/carteras/     -> carteras
      fotos/amigurumis/   -> amigurumis
-     fotos/comida/       -> turrones y comida
+     fotos/comidas/       -> turrones y comida
 
    IMPORTANTE: todos los precios están en 0. Cámbialos por los reales.
    ------------------------------------------------------------ */
@@ -335,7 +335,7 @@ const PRODUCTOS = [
    4) COMIDAS (página aparte: comidas.html)
    Pasteles salados, turrones y lo que quieras agregar. Se prepara
    por encargo. Copia un bloque, cambia los datos y listo.
-   Las fotos van en la carpeta "fotos/comida/".
+   Las fotos van en la carpeta "fotos/comidas/".
 
    Campos:
      id           -> texto único, sin espacios
@@ -346,7 +346,7 @@ const PRODUCTOS = [
      porciones    -> OPCIONAL, ej: "8 porciones"
      anticipacion -> OPCIONAL, ej: "Pedir con 2 días de anticipación"
      ingredientes -> OPCIONAL, ej: "Acelgas, queso, huevo"
-     imagen       -> "comida/" + nombre del archivo
+     imagen       -> "comidas/" + nombre del archivo
      descripcion  -> texto corto
      disponible   -> true / false
    ------------------------------------------------------------ */
