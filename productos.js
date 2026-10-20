@@ -371,6 +371,18 @@ const PRODUCTOS = [
     destacado: false,
     disponible: true,
   },
+  {
+    id: "ranita-bailarina",
+    nombre: "Ranita bailarina",
+    categoria: "ranitas",
+    precio: 80,
+    imagen: "ranitas/ranita-bailarina-mvh8uzfb0.jpeg",
+    descripcion: "Tejido a mano. Pieza única.",
+    medidas: "10cm",
+    edicion: "\"\"",
+    destacado: false,
+    disponible: true,
+  },
 ];
 
 
