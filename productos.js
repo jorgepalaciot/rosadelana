@@ -359,6 +359,17 @@ const PRODUCTOS = [
     destacado: true,
     disponible: true,
   },
+  {
+    id: "rana-vestido-rosado",
+    nombre: "Rana vestido rosado",
+    categoria: "ranitas",
+    precio: 80,
+    imagen: "ranitas/rana-vestido-rosado-mvh8kgp80.jpeg",
+    descripcion: "Tejido a mano. Pieza única.",
+    medidas: "10 cm",
+    destacado: false,
+    disponible: true,
+  },
 ];
 
 
