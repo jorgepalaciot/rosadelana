@@ -371,6 +371,18 @@ const PRODUCTOS = [
     destacado: false,
     disponible: true,
   },
+  {
+    id: "amigurumi-rana-vestido-rosado",
+    nombre: "Amigurumi Rana vestido rosado",
+    categoria: "ranitas",
+    precio: 100,
+    imagen: "ranitas/amigurumi-rana-vestido-rosado-mvh8d7qg0.jpeg",
+    descripcion: "Tejido a mano. Pieza única.",
+    medidas: "10 cm",
+    materiales: "algodón",
+    destacado: false,
+    disponible: true,
+  },
 ];
 
 
