@@ -371,12 +371,12 @@
           name: p.nombre,
           description: p.descripcion || p.nombre,
           image: absoluta(listaImagenes(p)[0]),
-          offers: {
+          ...(p.precio > 0 && { offers: {
             "@type": "Offer",
             price: String(p.precio),
             priceCurrency: "PEN",
             availability: p.disponible !== false ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
-          },
+          } }),
         })),
       ],
     };

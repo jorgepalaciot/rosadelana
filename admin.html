@@ -260,7 +260,7 @@ $("form").addEventListener("submit", async (e) => {
     const tipo = $("tipo").value, files = tipo === "comida" ? fotos.slice(0, 1) : fotos, rutas = [];
     for (let i = 0; i < files.length; i++) {
       log(`Subiendo foto ${i + 1} de ${files.length}…`);
-      const ruta = `${tipo === "comida" ? "comida" : cat}/${id}${files.length > 1 ? "-" + (i + 1) : ""}.jpeg`;
+      const ruta = `${tipo === "comida" ? "comidas" : cat}/${id}${files.length > 1 ? "-" + (i + 1) : ""}.jpeg`;
       const put = await api("fotos/" + ruta, { method: "PUT", body: JSON.stringify({ message: "Foto: " + id, content: await reducir(files[i]), branch: RAMA }) });
       if (!put.ok) throw new Error("No pude subir la foto " + (i + 1) + " (" + put.status + ").");
       rutas.push(ruta);
