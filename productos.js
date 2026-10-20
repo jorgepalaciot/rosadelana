@@ -352,6 +352,7 @@ const PRODUCTOS = [
    ------------------------------------------------------------ */
 const CATEGORIAS_COMIDAS = [
   { id: "pasteles", nombre: "Pasteles salados" },
+  { id: "pasteles-dulces", nombre: "Pasteles dulces" },
   { id: "turrones", nombre: "Turrones" },
 ];
 
