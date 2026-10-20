@@ -359,6 +359,18 @@ const PRODUCTOS = [
     destacado: true,
     disponible: true,
   },
+  {
+    id: "rana-bailarina",
+    nombre: "Rana bailarina",
+    categoria: "ranitas",
+    precio: 100,
+    imagen: "ranitas/rana-bailarina-mvh80zal0.jpeg",
+    descripcion: "Tejido a mano. Pieza única.",
+    medidas: "15cm",
+    materiales: "Algodón y otros",
+    destacado: false,
+    disponible: true,
+  },
 ];
 
 
