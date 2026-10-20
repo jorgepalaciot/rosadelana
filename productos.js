@@ -380,4 +380,17 @@ const COMIDAS = [
     descripcion: "Cambia este texto por la descripción real de tu turrón.",
     disponible: true,
   },
+  {
+    id: "torta-de-masapan",
+    nombre: "Torta de Masapan",
+    categoria: "pasteles-dulces",
+    precio: 120,
+    imagen: "comidas/torta-de-masapan-mvgbkfme0.jpeg",
+    descripcion: "Torta de zanahoria cubierta con forro de masapan y decorado",
+    presentacion: "Entero",
+    porciones: "Al rededor de 15 porciones",
+    anticipacion: "4 días de anticipación",
+    ingredientes: "Castaña, zanahoria, pasas, harina, huevos",
+    disponible: true,
+  },
 ];
