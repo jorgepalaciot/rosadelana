@@ -30,7 +30,7 @@ const CONFIG = {
   // Ranitas de colección: edición que se muestra en la portada (ej: "Halloween 2026").
   // Se muestran las ranitas disponibles cuyo campo "edicion" contenga este texto.
   // Déjalo "" para mostrar todas las ranitas disponibles.
-  edicionActual: "Halloween 2026",
+  edicionActual: "",
 
   // Mensaje que se abre en WhatsApp cuando alguien pregunta por un producto
   // Puedes usar {producto} y {precio}, se reemplazan automáticamente
@@ -367,7 +367,6 @@ const PRODUCTOS = [
     imagen: "ranitas/rana-vestido-rosado-mvh8kgp80.jpeg",
     descripcion: "Tejido a mano. Pieza única.",
     medidas: "10 cm",
-    edicion: "\"\"",
     destacado: false,
     disponible: true,
   },
@@ -379,7 +378,6 @@ const PRODUCTOS = [
     imagen: "ranitas/ranita-bailarina-mvh8uzfb0.jpeg",
     descripcion: "Tejido a mano. Pieza única.",
     medidas: "10cm",
-    edicion: "\"\"",
     destacado: false,
     disponible: true,
   },
