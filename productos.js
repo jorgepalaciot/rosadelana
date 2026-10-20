@@ -375,7 +375,7 @@ const COMIDAS = [
     categoria: "turrones",
     precio: 27,
     presentacion: "Porción en caja",
-    imagen: "comida/turron.jpeg",
+    imagen: "comidas/turron.jpeg",
     descripcion: "Cambia este texto por la descripción real de tu turrón.",
     disponible: true,
   },
