@@ -130,6 +130,7 @@
           ${!disponible ? '<span class="etiqueta-vendido">Vendido</span>' : ""}
         </div>
         <p class="tarjeta-categoria">${nombreCategoria(producto.categoria)}</p>
+        ${producto.edicion ? `<p class="tarjeta-edicion">${producto.edicion}</p>` : ""}
         <h3 class="tarjeta-nombre">${producto.nombre}</h3>
         <p class="tarjeta-precio">${formatearPrecio(producto.precio)}</p>
       </article>`;
@@ -145,6 +146,11 @@
     grid.innerHTML = lista.map(tarjetaHTML).join("");
     sinResultados.hidden = lista.length !== 0;
 
+    activarTarjetas(grid);
+  }
+
+  // Enlaza clic, teclado y botón de selección de las tarjetas de un contenedor
+  function activarTarjetas(grid) {
     grid.querySelectorAll(".tarjeta-producto").forEach((tarjeta) => {
       const abrir = () => abrirDetalle(tarjeta.dataset.id);
       tarjeta.addEventListener("click", abrir);
@@ -166,6 +172,34 @@
         e.stopPropagation(); // no disparar la consulta individual de la tarjeta
         alternarSeleccion(id);
       });
+    });
+  }
+
+  /* ---------- Ranitas de colección en la portada ---------- */
+  function pintarRanitas() {
+    const seccion = document.getElementById("ranitas");
+    const grid = document.getElementById("gridRanitas");
+    if (!seccion || !grid) return;
+
+    let lista = PRODUCTOS.filter((p) => p.categoria === "ranitas" && p.disponible !== false);
+    const ed = CONFIG.edicionActual;
+    if (ed) {
+      const deEdicion = lista.filter((p) => (p.edicion || "").includes(ed));
+      if (deEdicion.length) lista = deEdicion;
+    }
+    lista = lista.slice(0, 8);
+    seccion.hidden = lista.length === 0;
+    if (!lista.length) return;
+
+    document.getElementById("ranitasEdicion").textContent = ed ? "Edición " + ed : "Colección";
+    grid.innerHTML = lista.map(tarjetaHTML).join("");
+    activarTarjetas(grid);
+
+    const ver = document.getElementById("verRanitas");
+    if (ver) ver.addEventListener("click", () => {
+      categoriaActiva = "ranitas";
+      construirFiltros();
+      pintarProductos();
     });
   }
 
@@ -213,6 +247,9 @@
     }
 
     document.getElementById("modalCategoria").textContent = nombreCategoria(producto.categoria);
+    const ed = document.getElementById("modalEdicion");
+    ed.textContent = producto.edicion || "";
+    ed.hidden = !producto.edicion;
     document.getElementById("modalTitulo").textContent = producto.nombre;
     document.getElementById("modalPrecio").textContent = formatearPrecio(producto.precio);
     document.getElementById("modalDescripcion").textContent = producto.descripcion || "";
@@ -391,6 +428,7 @@
     pintarConfiguracionGeneral();
     construirFiltros();
     pintarProductos();
+    pintarRanitas();
     activarBusqueda();
     activarMenuMovil();
     activarHeaderScroll();

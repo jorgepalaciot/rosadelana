@@ -27,6 +27,11 @@ const CONFIG = {
   // Correo de contacto
   email: "hola@rosadelana.com",
 
+  // Ranitas de colección: edición que se muestra en la portada (ej: "Halloween 2026").
+  // Se muestran las ranitas disponibles cuyo campo "edicion" contenga este texto.
+  // Déjalo "" para mostrar todas las ranitas disponibles.
+  edicionActual: "Halloween 2026",
+
   // Mensaje que se abre en WhatsApp cuando alguien pregunta por un producto
   // Puedes usar {producto} y {precio}, se reemplazan automáticamente
   mensajeWhatsappProducto: "¡Hola! Vi «{producto}» ({precio}) en la web de Rosa de Lana y quisiera más información 🌸",
@@ -61,6 +66,7 @@ const CONFIG = {
    IGUAL en ambos lugares (sin tildes, en minúscula).
    ------------------------------------------------------------ */
 const CATEGORIAS = [
+  { id: "ranitas", nombre: "Ranitas de colección" },
   { id: "carteras", nombre: "Carteras" },
   { id: "amigurumis", nombre: "Amigurumis" },
   { id: "accesorios", nombre: "Accesorios" },
@@ -90,6 +96,7 @@ const CATEGORIAS = [
      descripcion  -> texto corto describiendo la pieza (aparece en el
                      detalle al hacer clic en el producto)
      destacado    -> true / false — true lo resalta con una cinta "Destacado"
+     edicion      -> OPCIONAL. Texto de la colección, ej: "Halloween 2026 · N° 3 de 8" (se ve en la tarjeta y en el detalle)
      disponible   -> true / false — false lo muestra como "Vendido" y no se puede consultar
 
    CARPETAS dentro de "fotos/":
@@ -328,18 +335,6 @@ const PRODUCTOS = [
     destacado: true,
     disponible: true,
   },
-  {
-    id: "amigurumi-angelica-rugrats",
-    nombre: "Amigurumi Angelica Rugrats",
-    categoria: "amigurumis",
-    precio: 160,
-    imagen: "amigurumis/amigurumi-angelica-rugrats-mvgbqhbv0.jpeg",
-    descripcion: "Angélica de Rugrats con su muñeca",
-    medidas: "18 cm",
-    materiales: "algodón",
-    destacado: false,
-    disponible: true,
-  },
 ];
 
 
@@ -390,19 +385,6 @@ const COMIDAS = [
     presentacion: "Porción en caja",
     imagen: "comidas/turron.jpeg",
     descripcion: "Cambia este texto por la descripción real de tu turrón.",
-    disponible: true,
-  },
-  {
-    id: "torta-de-masapan",
-    nombre: "Torta de Masapan",
-    categoria: "pasteles-dulces",
-    precio: 120,
-    imagen: "comidas/torta-de-masapan-mvgbkfme0.jpeg",
-    descripcion: "Torta de zanahoria cubierta con forro de masapan y decorado",
-    presentacion: "Entero",
-    porciones: "Al rededor de 15 porciones",
-    anticipacion: "4 días de anticipación",
-    ingredientes: "Castaña, zanahoria, pasas, harina, huevos",
     disponible: true,
   },
 ];

@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧶</text></svg>">
 </head>
 <body>
@@ -76,6 +76,19 @@
   </div>
 
   <a class="franja-temporada" id="franjaTemporada" href="comidas.html" hidden><span id="franjaTemporadaTexto"></span> Ver comidas</a>
+
+  <!-- RANITAS DE COLECCIÓN (se muestra sola cuando hay ranitas disponibles) -->
+  <section class="ranitas" id="ranitas" hidden>
+    <div class="contenedor">
+      <p class="eyebrow eyebrow-centrado" id="ranitasEdicion">Colección</p>
+      <h2 class="titulo-seccion">Ranitas de colección</h2>
+      <p class="subtitulo-seccion">
+        La misma ranita con un disfraz distinto en cada ocasión. Cada edición es limitada.
+      </p>
+      <div class="grid-productos" id="gridRanitas"></div>
+      <p class="ranitas-cta"><a href="#catalogo" class="boton boton-primario" id="verRanitas">Ver toda la colección</a></p>
+    </div>
+  </section>
 
   <!-- CATALOGO -->
   <section class="catalogo" id="catalogo">
@@ -254,6 +267,7 @@
 
     <div class="modal-info">
       <p class="modal-categoria" id="modalCategoria"></p>
+      <p class="modal-edicion" id="modalEdicion" hidden></p>
       <h3 id="modalTitulo"></h3>
       <p class="modal-precio" id="modalPrecio"></p>
       <p class="modal-descripcion" id="modalDescripcion"></p>
@@ -263,7 +277,7 @@
   </div>
 </div>
 
-<script src="productos.js?v=7"></script>
-<script src="main.js?v=7"></script>
+<script src="productos.js?v=8"></script>
+<script src="main.js?v=8"></script>
 </body>
 </html>

@@ -83,6 +83,8 @@
       <input id="medidas" placeholder="Ej. 25 x 18 x 8 cm">
       <label for="materiales">Materiales</label>
       <input id="materiales" placeholder="Ej. Lana 100% algodón, forro de tela">
+      <label for="edicion">Edición (opcional)</label>
+      <input id="edicion" placeholder="Ej. Halloween 2026 · N° 3 de 8">
     </div>
     <div class="solo-comida" hidden>
       <label for="presentacion">Presentación</label>
@@ -192,13 +194,13 @@ function armarBloque(id, tipo, cat, nombre, rutas) {
   let b = `  {\n    id: ${q(id)},\n    nombre: ${q(nombre)},\n    categoria: ${q(cat)},\n    precio: ${Number($("precio").value) || 0},\n    imagen: ${q(rutas[0])},\n`;
   if (!com && rutas.length > 1) b += `    imagenes: ${JSON.stringify(rutas)},\n`;
   b += `    descripcion: ${q(v("descripcion") || (com ? "Preparado por encargo." : "Tejido a mano. Pieza única."))},\n`;
-  for (const k of com ? ["presentacion", "porciones", "anticipacion", "ingredientes"] : ["medidas", "materiales"]) if (v(k)) b += `    ${k}: ${q(v(k))},\n`;
+  for (const k of com ? ["presentacion", "porciones", "anticipacion", "ingredientes"] : ["medidas", "materiales", "edicion"]) if (v(k)) b += `    ${k}: ${q(v(k))},\n`;
   return b + (com ? "" : `    destacado: ${$("destacado").checked},\n`) + `    disponible: ${$("disponible").checked},\n  },\n`;
 }
 
 /* ---------- Tipo y categorías ---------- */
 const CATS = {
-  tejido: [["carteras", "Carteras"], ["amigurumis", "Amigurumis"], ["accesorios", "Accesorios"], ["otros", "Otros"]],
+  tejido: [["carteras", "Carteras"], ["amigurumis", "Amigurumis"], ["ranitas", "Ranitas de colección"], ["accesorios", "Accesorios"], ["otros", "Otros"]],
   comida: [["pasteles", "Pasteles salados"], ["pasteles-dulces", "Pasteles dulces"], ["turrones", "Turrones"]],
 };
 function cambiarTipo() {
@@ -285,7 +287,7 @@ $("elegir").addEventListener("change", () => {
   const p = (t === "comida" ? datosRepo.COMIDAS : datosRepo.PRODUCTOS).find((x) => x.id === id);
   $("tipo").value = t; cambiarTipo(); editId = id;
   $("categoria").value = p.categoria; $("nombre").value = p.nombre; $("precio").value = p.precio;
-  for (const k of ["medidas", "materiales", "presentacion", "porciones", "anticipacion", "ingredientes", "descripcion"]) $(k).value = p[k] || "";
+  for (const k of ["medidas", "materiales", "edicion", "presentacion", "porciones", "anticipacion", "ingredientes", "descripcion"]) $(k).value = p[k] || "";
   $("destacado").checked = !!p.destacado; $("disponible").checked = p.disponible !== false;
   fotos = (p.imagenes && p.imagenes.length ? p.imagenes : [p.imagen]).map((r) => ({ url: "fotos/" + r, ruta: r }));
   $("eliminar").hidden = false; pintarPrevias();
