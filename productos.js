@@ -391,6 +391,19 @@ const PRODUCTOS = [
     destacado: false,
     disponible: true,
   },
+  {
+    id: "rana-rey",
+    nombre: "Rana rey",
+    categoria: "ranitas",
+    precio: 70,
+    imagen: "ranitas/rana-rey-mvh9h3ik0.jpeg",
+    imagenes: ["ranitas/rana-rey-mvh9h3ik0.jpeg","ranitas/rana-rey-mvh9h3ik1.jpeg"],
+    descripcion: "Tejido a mano. Pieza única.",
+    medidas: "10cm",
+    materiales: "Lana",
+    destacado: false,
+    disponible: true,
+  },
 ];
 
 
