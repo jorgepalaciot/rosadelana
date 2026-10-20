@@ -345,6 +345,20 @@ const PRODUCTOS = [
     destacado: false,
     disponible: true,
   },
+  {
+    id: "ranas",
+    nombre: "Ranas",
+    categoria: "ranitas",
+    precio: 200,
+    imagen: "ranitas/ranas-mvh6ru150.jpeg",
+    imagenes: ["ranitas/ranas-mvh6ru150.jpeg","ranitas/ranas-mvh6ru151.jpeg","ranitas/ranas-mvh6ru152.jpeg"],
+    descripcion: "Rana verde con traje de bruja y rana Potter incluye escoba",
+    medidas: "10cm",
+    materiales: "Algodón",
+    edicion: "Halloween 2026",
+    destacado: true,
+    disponible: true,
+  },
 ];
 
 
