@@ -328,6 +328,18 @@ const PRODUCTOS = [
     destacado: true,
     disponible: true,
   },
+  {
+    id: "amigurumi-angelica-rugrats",
+    nombre: "Amigurumi Angelica Rugrats",
+    categoria: "amigurumis",
+    precio: 160,
+    imagen: "amigurumis/amigurumi-angelica-rugrats-mvgbqhbv0.jpeg",
+    descripcion: "Angélica de Rugrats con su muñeca",
+    medidas: "18 cm",
+    materiales: "algodón",
+    destacado: false,
+    disponible: true,
+  },
 ];
 
 
