@@ -1161,3 +1161,12 @@ body {
 .tarjeta-turron .tarjeta-precio { margin-bottom: 12px; }
 #filtrosComidas { margin-bottom: 34px; }
 @media (max-width: 640px) { .tarjeta-meta { padding: 0 12px; } }
+
+
+/* --- Turrones de temporada --- */
+.franja-temporada { display: block; text-align: center; background: var(--rosa-oscuro); color: var(--blanco-hilo); padding: 12px 24px; font-weight: 700; font-size: 0.92rem; }
+.franja-temporada[hidden] { display: none; }
+.franja-temporada:hover { background: var(--rosa-oscuro-hover); }
+.franja-temporada::after { content: ""; }
+.nav-tag { display: inline-block; margin-left: 6px; padding: 2px 7px; border-radius: 4px; background: var(--lana-tostado); color: #fff; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.08em; vertical-align: 1px; text-shadow: none; }
+.nav-tag[hidden] { display: none; }

@@ -53,6 +53,16 @@
     const btnEncargo = document.getElementById("whatsappEncargo");
     if (btnEncargo) btnEncargo.href = urlWhatsapp(CONFIG.mensajeWhatsappEncargo);
 
+    // Aviso de turrones de temporada (franja en portada + etiqueta en el menú)
+    const temporada = CONFIG.comidasActivo !== false && CONFIG.turronesTemporada === true;
+    document.querySelectorAll("[data-temporada]").forEach((el) => { el.hidden = !temporada; });
+    const franja = document.getElementById("franjaTemporada");
+    if (franja && temporada) {
+      const fecha = CONFIG.turronesFechaLimite ? ` Pedidos hasta el ${CONFIG.turronesFechaLimite}.` : "";
+      document.getElementById("franjaTemporadaTexto").textContent = CONFIG.textoTemporada + fecha;
+      franja.hidden = false;
+    }
+
     // Enlaces a la página de comidas: se esconden si comidasActivo es false
     if (CONFIG.comidasActivo === false) {
       document.querySelectorAll("[data-comidas]").forEach((el) => { el.hidden = true; });

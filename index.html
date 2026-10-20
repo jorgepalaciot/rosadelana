@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="styles.css?v=8">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧶</text></svg>">
 </head>
 <body>
@@ -38,7 +38,7 @@
       <a href="#catalogo">Catálogo</a>
       <a href="#como-comprar">Cómo comprar</a>
       <a href="#nosotros">Nuestra historia</a>
-      <a href="comidas.html" data-comidas>Comidas</a>
+      <a href="comidas.html" data-comidas>Comidas <span class="nav-tag" data-temporada hidden>Temporada</span></a>
       <a href="#contacto" class="nav-cta">Escríbenos</a>
     </nav>
   </div>
@@ -73,6 +73,8 @@
       <div><strong>0</strong><span>piezas repetidas</span></div>
     </div>
   </div>
+
+  <a class="franja-temporada" id="franjaTemporada" href="comidas.html" hidden><span id="franjaTemporadaTexto"></span> Ver comidas</a>
 
   <!-- CATALOGO -->
   <section class="catalogo" id="catalogo">
@@ -260,7 +262,7 @@
   </div>
 </div>
 
-<script src="productos.js?v=5"></script>
-<script src="main.js?v=6"></script>
+<script src="productos.js?v=6"></script>
+<script src="main.js?v=7"></script>
 </body>
 </html>

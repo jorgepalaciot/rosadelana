@@ -12,13 +12,14 @@
 
   function tarjeta(c) {
     const ok = c.disponible !== false;
+    const cinta = ok && c.categoria === "turrones" && CONFIG.turronesTemporada ? '<span class="cinta-destacado">De temporada</span>' : "";
     const boton = ok
       ? `<a class="boton boton-primario" href="${wa(mensaje(c))}" target="_blank" rel="noopener">Pedir por WhatsApp</a>`
       : `<a class="boton boton-primario" aria-disabled="true">No disponible</a>`;
     return `
       <article class="tarjeta-producto tarjeta-turron">
         <div class="tarjeta-imagen">
-          <img src="${RUTA}${c.imagen}" alt="${c.nombre}" loading="lazy">
+          ${cinta}<img src="${RUTA}${c.imagen}" alt="${c.nombre}" loading="lazy">
           ${ok ? "" : '<span class="etiqueta-vendido">No disponible</span>'}
         </div>
         <p class="tarjeta-categoria">${nombreCat(c.categoria)}</p>
@@ -32,6 +33,7 @@
 
   function pintar() {
     const lista = COMIDAS.filter((c) => categoria === "todas" || c.categoria === categoria);
+    if (CONFIG.turronesTemporada) lista.sort((a, b) => (b.categoria === "turrones") - (a.categoria === "turrones"));
     document.getElementById("gridComidas").innerHTML = lista.map(tarjeta).join("");
 
     const f = document.getElementById("filtrosComidas");
@@ -52,8 +54,8 @@
       aviso.hidden = true;
       document.getElementById("filtrosComidas").hidden = true;
     } else {
-      aviso.textContent = CONFIG.avisoComidas || "";
-      aviso.hidden = !CONFIG.avisoComidas;
+      aviso.textContent = (CONFIG.avisoComidas || "") + (CONFIG.turronesTemporada && CONFIG.turronesFechaLimite ? ` Turrones: pedidos hasta el ${CONFIG.turronesFechaLimite}.` : "");
+      aviso.hidden = !aviso.textContent;
       pintar();
     }
 

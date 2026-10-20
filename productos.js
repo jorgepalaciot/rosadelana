@@ -40,6 +40,14 @@ const CONFIG = {
   // Comidas (página aparte: comidas.html)
   // Pon false para esconder la página y todos sus enlaces.
   comidasActivo: true,
+
+  // Turrones de temporada: con true aparece una franja en la portada,
+  // una etiqueta "Temporada" en el menú y la cinta "De temporada" en los turrones.
+  // Cuando termine la época, pon false y todo eso desaparece.
+  turronesTemporada: true,
+  // Fecha límite para recibir pedidos (opcional). Ej: "20 de octubre". Déjalo "" si no quieres mostrarla.
+  turronesFechaLimite: "",
+  textoTemporada: "Turrones de temporada: ya puedes hacer tu pedido.",
   mensajeWhatsappComida: "¡Hola! Vi «{producto}» ({precio}) en la sección de comidas de Rosa de Lana y quisiera hacer un pedido 🍽️ Lo necesitaría para el día: ",
   // Texto que aparece arriba de las comidas (anticipación, entrega, etc.)
   avisoComidas: "Todo se prepara por encargo. Coordinamos fecha, cantidad y forma de entrega por WhatsApp.",
