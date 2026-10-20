@@ -381,6 +381,16 @@ const PRODUCTOS = [
     destacado: false,
     disponible: true,
   },
+  {
+    id: "rana-mayor",
+    nombre: "Rana mayor",
+    categoria: "ranitas",
+    precio: 70,
+    imagen: "ranitas/rana-mayor-mvh9czkc0.jpeg",
+    descripcion: "Tejido a mano. Pieza única.",
+    destacado: false,
+    disponible: true,
+  },
 ];
 
 
