@@ -101,7 +101,11 @@
   /* ---------- Tarjetas de producto ---------- */
   function productosFiltrados() {
     const lista = PRODUCTOS.filter((p) => {
-      const coincideCategoria = categoriaActiva === "todas" || p.categoria === categoriaActiva;
+      // Un producto sale en su categoría y también en las de su lista "tambien" (opcional)
+      const coincideCategoria =
+        categoriaActiva === "todas" ||
+        p.categoria === categoriaActiva ||
+        (Array.isArray(p.tambien) && p.tambien.includes(categoriaActiva));
       const coincideBusqueda = p.nombre.toLowerCase().includes(textoBusqueda.toLowerCase());
       return coincideCategoria && coincideBusqueda;
     });

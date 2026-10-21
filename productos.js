@@ -97,6 +97,9 @@ const CATEGORIAS = [
                      detalle al hacer clic en el producto)
      destacado    -> true / false — true lo resalta con una cinta "Destacado"
      edicion      -> OPCIONAL. Texto de la colección, ej: "Halloween 2026 · N° 3 de 8" (se ve en la tarjeta y en el detalle)
+     tambien      -> OPCIONAL. Lista de otras categorías donde también debe salir,
+                     ej: tambien: ["amigurumis"]  (una ranita aparece en "Ranitas de
+                     colección" y también en "Amigurumis", sin duplicarse en "Todo")
      disponible   -> true / false — false lo muestra como "Vendido" y no se puede consultar
 
    CARPETAS dentro de "fotos/":
@@ -349,6 +352,7 @@ const PRODUCTOS = [
     id: "ranas",
     nombre: "Ranas",
     categoria: "ranitas",
+    tambien: ["amigurumis"],
     precio: 200,
     imagen: "ranitas/ranas-mvh6ru150.jpeg",
     imagenes: ["ranitas/ranas-mvh6ru150.jpeg","ranitas/ranas-mvh6ru151.jpeg","ranitas/ranas-mvh6ru152.jpeg"],
@@ -363,6 +367,7 @@ const PRODUCTOS = [
     id: "rana-vestido-rosado",
     nombre: "Rana vestido rosado",
     categoria: "ranitas",
+    tambien: ["amigurumis"],
     precio: 80,
     imagen: "ranitas/rana-vestido-rosado-mvh8kgp80.jpeg",
     descripcion: "Tejido a mano. Pieza única.",
@@ -374,6 +379,7 @@ const PRODUCTOS = [
     id: "ranita-bailarina",
     nombre: "Ranita bailarina",
     categoria: "ranitas",
+    tambien: ["amigurumis"],
     precio: 80,
     imagen: "ranitas/ranita-bailarina-mvh8uzfb0.jpeg",
     descripcion: "Tejido a mano. Pieza única.",
@@ -385,6 +391,7 @@ const PRODUCTOS = [
     id: "rana-mayor",
     nombre: "Rana mayor",
     categoria: "ranitas",
+    tambien: ["amigurumis"],
     precio: 70,
     imagen: "ranitas/rana-mayor-mvh9czkc0.jpeg",
     descripcion: "Tejido a mano. Pieza única.",
@@ -395,6 +402,7 @@ const PRODUCTOS = [
     id: "rana-rey",
     nombre: "Rana rey",
     categoria: "ranitas",
+    tambien: ["amigurumis"],
     precio: 70,
     imagen: "ranitas/rana-rey-mvh9h3ik0.jpeg",
     imagenes: ["ranitas/rana-rey-mvh9h3ik0.jpeg","ranitas/rana-rey-mvh9h3ik1.jpeg"],

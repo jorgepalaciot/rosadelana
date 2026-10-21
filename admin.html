@@ -124,6 +124,7 @@
     </div>
 
     <label class="check solo-tejido"><input type="checkbox" id="destacado"> Destacado (aparece primero en el catálogo)</label>
+    <label class="check" id="bloqueTambien" hidden><input type="checkbox" id="tambien"> Mostrar también en Amigurumis</label>
     <label class="check"><input type="checkbox" id="disponible" checked> Disponible (desmárcalo si ya se vendió)</label>
 
     <button id="enviar" type="submit">Publicar producto</button>
@@ -195,6 +196,7 @@ function armarBloque(id, tipo, cat, nombre, rutas) {
   if (!com && rutas.length > 1) b += `    imagenes: ${JSON.stringify(rutas)},\n`;
   b += `    descripcion: ${q(v("descripcion") || (com ? "Preparado por encargo." : "Tejido a mano. Pieza única."))},\n`;
   for (const k of com ? ["presentacion", "porciones", "anticipacion", "ingredientes"] : ["medidas", "materiales", "edicion"]) if (v(k)) b += `    ${k}: ${q(v(k))},\n`;
+  if (!com && cat !== "amigurumis" && $("tambien").checked) b += `    tambien: ["amigurumis"],\n`;
   return b + (com ? "" : `    destacado: ${$("destacado").checked},\n`) + `    disponible: ${$("disponible").checked},\n  },\n`;
 }
 
@@ -208,9 +210,19 @@ function cambiarTipo() {
   $("categoria").innerHTML = CATS[t].map(([v, n]) => `<option value="${v}">${n}</option>`).join("");
   document.querySelectorAll(".solo-tejido").forEach((e) => (e.hidden = t !== "tejido"));
   document.querySelectorAll(".solo-comida").forEach((e) => (e.hidden = t !== "comida"));
+  ajustarTambien();
   pintarVista();
 }
+// La casilla "también en Amigurumis" solo aplica a tejidos que no son amigurumis
+function ajustarTambien() {
+  $("bloqueTambien").hidden = $("tipo").value !== "tejido" || $("categoria").value === "amigurumis";
+}
 $("tipo").addEventListener("change", cambiarTipo);
+$("categoria").addEventListener("change", () => {
+  // Al agregar una ranita nueva, la casilla viene marcada (se puede desmarcar)
+  if ($("modo").value !== "editar") $("tambien").checked = $("categoria").value === "ranitas";
+  ajustarTambien();
+});
 
 /* ---------- Fotos: {url, file} nuevas o {url, ruta} ya publicadas ---------- */
 let fotos = [], datosRepo = null, editId = null;
@@ -289,6 +301,7 @@ $("elegir").addEventListener("change", () => {
   $("categoria").value = p.categoria; $("nombre").value = p.nombre; $("precio").value = p.precio;
   for (const k of ["medidas", "materiales", "edicion", "presentacion", "porciones", "anticipacion", "ingredientes", "descripcion"]) $(k).value = p[k] || "";
   $("destacado").checked = !!p.destacado; $("disponible").checked = p.disponible !== false;
+  $("tambien").checked = Array.isArray(p.tambien) && p.tambien.includes("amigurumis"); ajustarTambien();
   fotos = (p.imagenes && p.imagenes.length ? p.imagenes : [p.imagen]).map((r) => ({ url: "fotos/" + r, ruta: r }));
   $("eliminar").hidden = false; pintarPrevias();
 });
