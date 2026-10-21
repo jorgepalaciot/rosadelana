@@ -207,6 +207,110 @@
     });
   }
 
+  /* ---------- Zoom de la foto en el detalle ----------
+     Toque o clic: acerca (el punto tocado queda bajo el dedo/cursor).
+     Con el mouse, al mover el cursor se recorre la foto. En el celular,
+     se arrastra con el dedo. Otro toque o clic la vuelve a su tamaño. */
+  const ZOOM_ESCALA = 2.5;
+  const zoomFoto = { activo: false, tx: 0, ty: 0 };
+  const cajaFoto = () => document.querySelector(".modal-imagen-principal");
+
+  function pintarZoom() {
+    const caja = cajaFoto();
+    const img = document.getElementById("modalImagen");
+    if (!caja || !img) return;
+    const limX = ((ZOOM_ESCALA - 1) * caja.clientWidth) / 2;
+    const limY = ((ZOOM_ESCALA - 1) * caja.clientHeight) / 2;
+    zoomFoto.tx = Math.max(-limX, Math.min(limX, zoomFoto.tx));
+    zoomFoto.ty = Math.max(-limY, Math.min(limY, zoomFoto.ty));
+    img.style.transform = zoomFoto.activo
+      ? `translate(${zoomFoto.tx}px, ${zoomFoto.ty}px) scale(${ZOOM_ESCALA})`
+      : "";
+    caja.classList.toggle("con-zoom", zoomFoto.activo);
+    caja.setAttribute("aria-label", zoomFoto.activo ? "Alejar foto" : "Acercar foto");
+  }
+
+  function reiniciarZoom() {
+    zoomFoto.activo = false;
+    zoomFoto.tx = 0;
+    zoomFoto.ty = 0;
+    pintarZoom();
+  }
+
+  function activarZoomFoto() {
+    const caja = cajaFoto();
+    if (!caja) return;
+    caja.tabIndex = 0;
+    caja.setAttribute("role", "button");
+    caja.setAttribute("aria-label", "Acercar foto");
+    caja.querySelector("img").draggable = false;
+
+    let toque = null; // arrastre con dedo: { x, y, tx, ty, movio }
+
+    // Desplazamiento que deja bajo el cursor el punto en (e.clientX, e.clientY)
+    const desdeCentro = (e) => {
+      const r = caja.getBoundingClientRect();
+      return {
+        tx: -(ZOOM_ESCALA - 1) * (e.clientX - r.left - r.width / 2),
+        ty: -(ZOOM_ESCALA - 1) * (e.clientY - r.top - r.height / 2),
+      };
+    };
+
+    const alternar = (e) => {
+      if (zoomFoto.activo) return reiniciarZoom();
+      zoomFoto.activo = true;
+      const p = e ? desdeCentro(e) : { tx: 0, ty: 0 };
+      zoomFoto.tx = p.tx;
+      zoomFoto.ty = p.ty;
+      pintarZoom();
+    };
+
+    caja.addEventListener("pointerdown", (e) => {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      toque = { x: e.clientX, y: e.clientY, tx: zoomFoto.tx, ty: zoomFoto.ty, movio: false };
+      if (e.pointerType !== "mouse" && zoomFoto.activo) caja.setPointerCapture(e.pointerId);
+    });
+
+    caja.addEventListener("pointermove", (e) => {
+      if (!zoomFoto.activo) return;
+      if (e.pointerType === "mouse") {
+        const p = desdeCentro(e);
+        zoomFoto.tx = p.tx;
+        zoomFoto.ty = p.ty;
+        pintarZoom();
+      } else if (toque) {
+        const dx = e.clientX - toque.x;
+        const dy = e.clientY - toque.y;
+        if (Math.abs(dx) + Math.abs(dy) > 6) toque.movio = true;
+        zoomFoto.tx = toque.tx + dx;
+        zoomFoto.ty = toque.ty + dy;
+        caja.classList.add("arrastrando");
+        pintarZoom();
+      }
+    });
+
+    caja.addEventListener("pointerup", (e) => {
+      caja.classList.remove("arrastrando");
+      const fueToque = toque && !toque.movio;
+      toque = null;
+      if (fueToque) alternar(e);
+    });
+
+    caja.addEventListener("pointercancel", () => {
+      toque = null;
+      caja.classList.remove("arrastrando");
+    });
+
+    caja.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        alternar(null);
+      }
+    });
+
+    window.addEventListener("resize", reiniciarZoom);
+  }
+
   /* ---------- Modal de detalle ---------- */
   function listaImagenes(producto) {
     if (Array.isArray(producto.imagenes) && producto.imagenes.length > 0) {
@@ -220,6 +324,7 @@
     if (!producto) return;
 
     const imagenes = listaImagenes(producto);
+    reiniciarZoom();
 
     const imgPrincipal = document.getElementById("modalImagen");
     imgPrincipal.src = RUTA_IMAGENES + imagenes[0];
@@ -240,6 +345,7 @@
 
       contenedorMini.querySelectorAll(".modal-miniatura").forEach((mini) => {
         mini.addEventListener("click", () => {
+          reiniciarZoom();
           imgPrincipal.src = mini.dataset.src;
           contenedorMini.querySelectorAll(".modal-miniatura").forEach((m) => m.classList.remove("activa"));
           mini.classList.add("activa");
@@ -284,6 +390,7 @@
   }
 
   function cerrarDetalle() {
+    reiniciarZoom();
     document.getElementById("modalProducto").hidden = true;
     document.body.style.overflow = "";
   }
@@ -438,6 +545,7 @@
     activarHeaderScroll();
     activarBarraSeleccion();
     activarModal();
+    activarZoomFoto();
     inyectarDatosEstructurados();
   });
 })();
