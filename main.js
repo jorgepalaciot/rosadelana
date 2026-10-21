@@ -21,10 +21,20 @@
     return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(mensaje)}`;
   }
 
+  // Enlace directo a la primera foto del producto (WhatsApp suele mostrarlo como vista previa).
+  // Para quitarlo, en productos.js agrega dentro de CONFIG:  incluirFotoWhatsapp: false,
+  function urlFoto(producto) {
+    if (CONFIG.incluirFotoWhatsapp === false) return "";
+    const archivo = listaImagenes(producto)[0];
+    return archivo ? encodeURI(new URL(RUTA_IMAGENES + archivo, window.location.href).href) : "";
+  }
+
   function mensajeProducto(producto) {
-    return CONFIG.mensajeWhatsappProducto
+    const texto = CONFIG.mensajeWhatsappProducto
       .replace("{producto}", producto.nombre)
       .replace("{precio}", formatearPrecio(producto.precio));
+    const foto = urlFoto(producto);
+    return foto ? `${texto}\n\nFoto: ${foto}` : texto;
   }
 
   /* ---------- Configuración general en la página ---------- */
@@ -437,8 +447,8 @@
 
     const productosSeleccionados = PRODUCTOS.filter((p) => seleccionados.has(p.id));
     const lineas = productosSeleccionados
-      .map((p) => `• ${p.nombre} (${formatearPrecio(p.precio)})`)
-      .join("\n");
+      .map((p) => `• ${p.nombre} (${formatearPrecio(p.precio)})` + (urlFoto(p) ? `\n${urlFoto(p)}` : ""))
+      .join("\n\n");
     const total = productosSeleccionados.reduce((suma, p) => suma + p.precio, 0);
     const mensaje = `¡Hola! Me interesan estas piezas de Rosa de Lana 🌸\n\n${lineas}\n\nTotal aproximado: ${formatearPrecio(total)}`;
 
