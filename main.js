@@ -524,18 +524,37 @@
           url: window.location.href.split("#")[0],
           sameAs: [CONFIG.instagramUrl],
         },
-        ...PRODUCTOS.map((p) => ({
-          "@type": "Product",
-          name: p.nombre,
-          description: p.descripcion || p.nombre,
-          image: absoluta(listaImagenes(p)[0]),
-          ...(p.precio > 0 && { offers: {
-            "@type": "Offer",
-            price: String(p.precio),
-            priceCurrency: "PEN",
-            availability: p.disponible !== false ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
-          } }),
-        })),
+
+         ...PRODUCTOS.map((p) => ({
+           "@type": "Product",
+           name: p.nombre,
+           description: p.descripcion || p.nombre,
+           image: absoluta(listaImagenes(p)[0]),
+           brand: { "@type": "Brand", name: "Rosa de Lana" },
+           ...(p.precio > 0 && { offers: {
+             "@type": "Offer",
+             price: String(p.precio),
+             priceCurrency: "PEN",
+             availability: p.disponible !== false ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
+             hasMerchantReturnPolicy: {
+               "@type": "MerchantReturnPolicy",
+               applicableCountry: "PE",
+               returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted"
+             },
+             shippingDetails: {
+               "@type": "OfferShippingDetails",
+               shippingDestination: { "@type": "DefinedRegion", addressCountry: "PE" },
+               shippingRate: { "@type": "MonetaryAmount", value: "10", currency: "PEN" },
+               deliveryTime: {
+                 "@type": "ShippingDeliveryTime",
+                 handlingTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 5, unitCode: "DAY" },
+                 transitTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 3, unitCode: "DAY" }
+               }
+             }
+           } }),
+         })),
+
+         
       ],
     };
     const s = document.createElement("script");
