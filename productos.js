@@ -176,7 +176,7 @@ const PRODUCTOS = [
     id: "cartera-negra",
     nombre: "Cartera Negra",
     categoria: "carteras",
-    precio: 0,
+    precio: 200,
     imagen: "carteras/cartera-negra.jpeg",
     descripcion: "Cartera tejida a mano. Pieza única.",
     destacado: false,
